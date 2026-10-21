@@ -1,0 +1,126 @@
+---
+import '../styles/zork.css';
+import { defaultSettings } from '../lib/if/settings';
+import { STYLES } from '../lib/if/styles';
+
+const base = import.meta.env.BASE_URL;
+const name = 'Zork AI';
+const description = "Infocom's Zork I in your browser, with an AI-made picture of each place drawn through your own OpenRouter key.";
+const defaults = defaultSettings();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{name}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fbfaf5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14161a" media="(prefers-color-scheme: dark)" />
+    <link rel="manifest" href={`${base}manifest.webmanifest`} />
+    <link rel="icon" type="image/png" sizes="192x192" href={`${base}icon-192.png`} />
+    <link rel="apple-touch-icon" href={`${base}icon-180.png`} />
+  </head>
+  <body>
+    <a class="skip" href="#command">Skip to the command box</a>
+    <main class="game" data-game>
+      <div class="stage">
+        <h1 class="titlebar"><span>{name}</span></h1>
+
+        <div class="body">
+          <section class="picture" data-picture aria-label="Picture of the current place">
+            <div class="frame">
+              <img data-image alt="AI-made picture of the current place" hidden />
+              <video data-video controls playsinline muted loop aria-label="AI-made video of the current place" hidden></video>
+              <p class="placeholder" data-placeholder>No picture yet. Add an OpenRouter key under Settings to see one for each place.</p>
+            </div>
+            <p class="notice" data-notice role="status"></p>
+            <div class="row">
+              <button type="button" class="gbtn" data-act="video" aria-describedby="video-hint">Make a video</button>
+              <button type="button" class="gbtn" data-act="retry" aria-describedby="retry-hint">Redraw picture</button>
+              <button type="button" class="gbtn" data-act="close-video" hidden>Close video</button>
+            </div>
+            <p class="fine" id="video-hint">Makes a short clip of where you are. It costs money on your OpenRouter account.</p>
+            <p class="fine" id="retry-hint">Asks for this place's picture again, for example after an error.</p>
+          </section>
+
+          <section class="text" aria-label="The game">
+            <div class="log" data-log role="log" aria-live="polite" aria-relevant="additions" aria-label="Game text" tabindex="0"></div>
+            <form class="cmd" data-form>
+              <label for="command">Command</label>
+              <input id="command" data-input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" maxlength="200" aria-describedby="command-hint" />
+              <button type="submit" class="gbtn">Send</button>
+            </form>
+            <p class="fine" id="command-hint">Type what you want to do, such as open mailbox or go north, then press Enter.</p>
+          </section>
+        </div>
+
+        <div class="bar">
+          <label class="inline">Art style
+            <select data-style aria-describedby="style-hint">
+              {STYLES.map((s) => <option value={s.id}>{s.label}</option>)}
+            </select>
+          </label>
+          <p class="fine" id="style-hint">Changing the style draws new pictures. Pictures in other styles are kept.</p>
+        </div>
+
+        <details class="settings" data-settings>
+          <summary>Settings</summary>
+          <div class="fields">
+            <p id="cost-notice">
+              Pictures and videos are made by AI models through your own OpenRouter account and cost real money, charged
+              by OpenRouter. The description of each place and your art style are sent to OpenRouter and the model's
+              provider. Your commands are not. Nothing is sent to the people who made this app. Nothing is made until
+              you accept this and add a key.
+            </p>
+            <label class="check"><input type="checkbox" data-consent aria-describedby="cost-notice" /> I understand and accept the cost</label>
+            <label>OpenRouter key
+              <input type="password" data-key autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" aria-describedby="key-hint" />
+            </label>
+            <p class="fine" id="key-hint">Kept in this browser only and sent to openrouter.ai alone. Anyone who can use this browser profile can read it.</p>
+            <button type="button" class="gbtn" data-act="forget">Forget key</button>
+            <p class="fine" data-settings-status role="status"></p>
+            <label>Picture model
+              <input type="text" data-image-model autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" value={defaults.imageModel} />
+            </label>
+            <label>Video model
+              <input type="text" data-video-model autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" value={defaults.videoModel} />
+            </label>
+            <p class="fine" data-caps>This session: up to {defaults.maxImages} pictures and {defaults.maxVideos} videos. Reloading the page starts a new session.</p>
+          </div>
+        </details>
+
+        <details class="about">
+          <summary>About and privacy</summary>
+          <div class="prose">
+            <p>
+              Type short commands such as <em>look</em>, <em>go north</em>, <em>open mailbox</em> or <em>take lamp</em>. The
+              game answers in text at once; pictures and videos arrive later and never hold the game up.
+            </p>
+            <h2>Pictures and videos</h2>
+            <ul>
+              <li>Open Settings, read the cost notice, accept it, and paste an OpenRouter key. Without a key the game is still fully playable.</li>
+              <li>Each new place gets one picture in your chosen art style. A place you have seen before shows its saved picture for free.</li>
+              <li>A short video is made when your score goes up, when you die, and at the end. Press Make a video to film where you are.</li>
+              <li>Each session is capped (see Settings). Pictures and videos are saved in this browser, not on a server.</li>
+            </ul>
+            <p>
+              Your position, art style and settings are saved in this browser only. Zork is a trademark of its owner; this
+              is an unofficial interpretation of Infocom's Zork I, released by Microsoft under the MIT license.
+            </p>
+          </div>
+        </details>
+
+        <p class="credit">Based on Infocom's Zork I, released by Microsoft under the MIT license.</p>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <p><a href="https://cantlosesoftware.com" rel="noopener">A Cant Lose Software project</a></p>
+    </footer>
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

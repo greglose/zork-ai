@@ -1,0 +1,30 @@
+{
+  "name": "zork-ai",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Infocom's Zork I in the browser, with AI-drawn pictures of each place using your own OpenRouter key.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^7.3.5",
+    "glkote-term": "0.4.4",
+    "ifvms": "^1.1.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "cheerio": "^1.2.0",
+    "happy-dom": "^20.14.5",
+    "typescript": "6.0.3",
+    "vitest": "^5.0.2"
+  }
+}
