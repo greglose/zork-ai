@@ -127,7 +127,7 @@ async function init(): Promise<void> {
 
   const persistGame = () => {
     try {
-      writeGameSave(storage, { styleId: settings.styleByGame[GAME] ?? null, bytes: engine.save() });
+      writeGameSave(storage, { styleId: settings.styleByGame[GAME] ?? null, bytes: engine.save(), moments: controller.firedMoments() });
     } catch {
       // The game cannot save right now (for example after it ended): play on.
     }
@@ -165,7 +165,7 @@ async function init(): Promise<void> {
     controller.retryImage();
   });
 
-  await controller.start(save.bytes ?? undefined);
+  await controller.start(save.bytes ?? undefined, save.moments);
   persistGame();
   els.input.focus({ preventScroll: true });
   void registerSW({ base, dev: import.meta.env.DEV, container: 'serviceWorker' in navigator ? navigator.serviceWorker : undefined });

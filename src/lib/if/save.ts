@@ -11,11 +11,14 @@ export const SETTINGS_KEY = 'cls.if-settings';
 export interface GameSave {
   styleId: string | null;
   bytes: Uint8Array | null;
+  /** Ids of the picture moments (see scenes/moments.json) already seen in this game; they never fire twice. */
+  moments?: string[];
 }
 
 export const freshGameSave = (): GameSave => ({ styleId: null, bytes: null });
 
 const CHUNK = 0x8000;
+const MAX_MOMENTS = 200;
 
 export function toBase64(bytes: Uint8Array): string {
   let bin = '';
@@ -43,7 +46,10 @@ export function loadGameSave(storage: Pick<Storage, 'getItem'> | undefined): Gam
     if (s.version !== 1) return freshGameSave();
     const styleId = typeof s.styleId === 'string' && STYLES.some((x) => x.id === s.styleId) ? s.styleId : null;
     const bytes = typeof s.bytes === 'string' ? fromBase64(s.bytes) : null;
-    return { styleId, bytes };
+    const moments = Array.isArray(s.moments)
+      ? s.moments.filter((m): m is string => typeof m === 'string' && /^[a-z0-9]+(-[a-z0-9]+)*$/.test(m)).slice(0, MAX_MOMENTS)
+      : [];
+    return moments.length ? { styleId, bytes, moments } : { styleId, bytes };
   } catch {
     return freshGameSave();
   }
@@ -53,7 +59,12 @@ export function writeGameSave(storage: Pick<Storage, 'setItem'> | undefined, sav
   try {
     storage?.setItem(
       GAME_SAVE_KEY,
-      JSON.stringify({ version: 1, styleId: save.styleId, bytes: save.bytes ? toBase64(save.bytes) : null }),
+      JSON.stringify({
+        version: 1,
+        styleId: save.styleId,
+        bytes: save.bytes ? toBase64(save.bytes) : null,
+        ...(save.moments?.length ? { moments: save.moments.slice(0, MAX_MOMENTS) } : {}),
+      }),
     );
   } catch {
     // Private mode or a full disk: the game plays on and simply does not remember.

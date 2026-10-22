@@ -93,3 +93,35 @@ describe('player description in prompts', () => {
     expect(p).not.toContain('x'.repeat(501));
   });
 });
+
+describe('scene changes and darkness in image prompts', () => {
+  it('is_byte_identical_without_changes_or_darkness', () => {
+    expect(buildImagePrompt({ ...base, changes: [] })).toBe(buildImagePrompt(base));
+    expect(buildImagePrompt({ ...base, dark: false })).toBe(buildImagePrompt(base));
+  });
+  it('adds_each_change_after_the_scene_in_order', () => {
+    const p = buildImagePrompt({ ...base, changes: ['Same view, but the rug is moved.', 'Same view, but the trap door is open.'] });
+    const lines = p.split('\n');
+    expect(lines.slice(-3)).toEqual([
+      `Scene: ${base.text}`,
+      'Change: Same view, but the rug is moved.',
+      'Change: Same view, but the trap door is open.',
+    ]);
+  });
+  it('keeps_changes_ascii_and_capped', () => {
+    const p = buildImagePrompt({ ...base, changes: ['Caf\u00e9 ' + 'b'.repeat(900)] });
+    expect(p).toContain('b'.repeat(590));
+    expect(p).not.toContain('b'.repeat(601));
+    expect(/^[\x20-\x7e\n]*$/.test(p)).toBe(true);
+  });
+  it('says_so_when_the_place_is_dark', () => {
+    const p = buildImagePrompt({ ...base, dark: true });
+    expect(p).toMatch(/Lighting: .*darkness/);
+    expect(p.indexOf('Lighting:')).toBeGreaterThan(p.indexOf('Scene:'));
+  });
+  it('puts_the_player_block_before_the_place_and_the_changes_after_the_scene', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: 'I am a hiker', changes: ['Same view, but x.'] });
+    expect(p.indexOf('I am a hiker')).toBeLessThan(p.indexOf('Place:'));
+    expect(p.indexOf('Change:')).toBeGreaterThan(p.indexOf('Scene:'));
+  });
+});

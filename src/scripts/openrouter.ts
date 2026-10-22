@@ -13,6 +13,15 @@
 // Poll/content URLs are rebuilt from the job id, never taken from the response, so the key cannot be sent
 // to a host the server named.
 
+// Reference pictures (so a changed scene can be drawn from the earlier picture of the same place): the same
+// POST /api/v1/images with an `input_references` array of {type:'image_url', image_url:{url}} entries, where url is a
+// base64 data URL (docs: /docs/guides/overview/multimodal/image-generation, "image editing"; the model's endpoint must
+// list `input_references` in supported_parameters). Not every image model takes one. A 400/422 for a request that had a
+// reference is retried once without it, and that model is not sent references again in this page load, so the
+// picture is then made from the prompt alone (which always repeats the place and the change).
+
+import { toBase64 } from '../lib/if/save';
+
 export type MediaFailure = 'no-key' | 'auth' | 'credit' | 'rate' | 'refused' | 'network' | 'timeout' | 'bad-response';
 export type MediaResult<T> = { ok: true; value: T } | { ok: false; reason: MediaFailure };
 
@@ -23,7 +32,8 @@ export interface OpenRouterDeps {
 }
 
 export interface OpenRouterClient {
-  image(model: string, prompt: string, signal?: AbortSignal): Promise<MediaResult<Blob>>;
+  /** `reference`, when given, is an earlier picture of the same place for the model to build on, if it accepts one. */
+  image(model: string, prompt: string, signal?: AbortSignal, reference?: Blob): Promise<MediaResult<Blob>>;
   video(model: string, prompt: string, signal?: AbortSignal): Promise<MediaResult<Blob>>;
 }
 
@@ -53,7 +63,18 @@ function b64ToBlob(b64: string, type: string): Blob | null {
   }
 }
 
+async function dataUrlOf(blob: Blob): Promise<string | null> {
+  try {
+    return `data:${blob.type || 'image/png'};base64,${toBase64(new Uint8Array(await blob.arrayBuffer()))}`;
+  } catch {
+    return null;
+  }
+}
+
 export function createOpenRouter(deps: OpenRouterDeps): OpenRouterClient {
+  /** Image models that turned a reference down this page load. */
+  const withoutReferences = new Set<string>();
+
   async function call(
     path: string,
     key: string,
@@ -86,10 +107,20 @@ export function createOpenRouter(deps: OpenRouterDeps): OpenRouterClient {
   }
 
   return {
-    async image(model, prompt, signal) {
+    async image(model, prompt, signal, reference) {
       const key = deps.getKey();
       if (!key) return fail('no-key');
-      const r = await call('/images', key, signal, { model, prompt });
+      const url = reference && !withoutReferences.has(model) ? await dataUrlOf(reference) : null;
+      let r = await call(
+        '/images',
+        key,
+        signal,
+        url ? { model, prompt, input_references: [{ type: 'image_url', image_url: { url } }] } : { model, prompt },
+      );
+      if (url && !r.ok && r.reason === 'refused') {
+        withoutReferences.add(model);
+        r = await call('/images', key, signal, { model, prompt });
+      }
       if (!r.ok) return r;
       const json = await readJson(r.res);
       const first = (json?.data as Array<Record<string, unknown>> | undefined)?.[0];

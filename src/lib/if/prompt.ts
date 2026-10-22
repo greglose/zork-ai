@@ -40,9 +40,21 @@ export function buildImagePrompt(i: {
   roomName: string;
   text: string;
   playerPrompt?: string;
+  /** Visible changes since the scene was first drawn, each a "Same view, but ..." line; appended in order. */
+  changes?: readonly string[];
+  /** The place is unlit: ask for a near-black picture. */
+  dark?: boolean;
 }): string {
   const prefix = styleOf(i.styleId);
-  return [prefix, BIBLES[i.game], ...playerBlock(i.playerPrompt, 'image'), `Place: ${ascii(i.roomName)}.`, `Scene: ${ascii(i.text).slice(0, MAX_TEXT).trim()}`].join('\n');
+  return [
+    prefix,
+    BIBLES[i.game],
+    ...playerBlock(i.playerPrompt, 'image'),
+    `Place: ${ascii(i.roomName)}.`,
+    `Scene: ${ascii(i.text).slice(0, MAX_TEXT).trim()}`,
+    ...(i.changes ?? []).map((c) => `Change: ${ascii(c).slice(0, MAX_TEXT).trim()}`),
+    ...(i.dark ? ['Lighting: the place is in near-total darkness. Show only a very dim suggestion of this view, mostly black.'] : []),
+  ].join('\n');
 }
 
 const MOMENT: Record<GameEvent['kind'], string> = {

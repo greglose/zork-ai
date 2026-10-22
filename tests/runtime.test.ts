@@ -109,9 +109,53 @@ describe('Zork page', () => {
 
   it('makes no second picture request when the player stays in the same room', async () => {
     await boot();
-    await type('open mailbox');
+    await type('look');
     await type('look');
     expect(fake.images.length).toBe(1);
+  });
+
+  it('draws the first room from its prebuilt prompt, not the text the game printed', async () => {
+    await boot();
+    expect(fake.images[0]).toContain('Place: West of House.');
+    expect(fake.images[0]).toContain('Scene: An open grassy field in front of a white clapboard house');
+    expect(fake.images[0]).not.toContain('boarded front door.\nThere is a small mailbox');
+  });
+
+  it('draws a changed picture when the game shows a moment, once, and shows it again on a revisit', async () => {
+    await boot();
+    await type('open mailbox');
+    expect(fake.images.length).toBe(2);
+    expect(fake.images[1]).toContain('Scene: An open grassy field');
+    expect(fake.images[1]).toContain('Change: Same view of the field and the white house, but the small mailbox beside the door now stands open');
+    await type('open mailbox');
+    expect(fake.images.length).toBe(2);
+    await type('north');
+    expect(fake.images.length).toBe(3);
+    await type('south');
+    expect(fake.images.length).toBe(3);
+    expect(q<HTMLImageElement>('[data-image]').hidden).toBe(false);
+    expect([...fake.stored.keys()].map((k) => JSON.parse(k).id).sort()).toEqual([
+      'north of house',
+      'west of house',
+      'west of house|m|mailbox-opened',
+    ]);
+  });
+
+  it('saves the fired moments with the game and a reload keeps drawing the changed place', async () => {
+    await boot();
+    await type('open mailbox');
+    expect(JSON.parse(localStorage.getItem(GAME_SAVE_KEY)!).moments).toEqual(['mailbox-opened']);
+    const before = fake.images.length;
+    // A reload: same storage, same picture store, a new page.
+    document.body.innerHTML = '';
+    const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)!);
+    writeSettings(localStorage, settings);
+    document.body.innerHTML = /<body[^>]*>([\s\S]*)<\/body>/.exec(page)![1].replace(/<script[\s\S]*?<\/script>/g, '');
+    vi.resetModules();
+    await import('../src/scripts/main.ts');
+    await vi.waitFor(() => expect(logText()).toContain('open field west of a white house'));
+    await settle();
+    expect(fake.images.length).toBe(before);
   });
 
   it('makes a request for a new room, and none when returning to a room already pictured', async () => {
@@ -126,7 +170,7 @@ describe('Zork page', () => {
     await boot();
     await type('open mailbox');
     await type('north');
-    expect(fake.images.length).toBe(2);
+    expect(fake.images.length).toBe(3);
     for (const prompt of fake.images) expect(prompt.toLowerCase()).not.toMatch(/open mailbox|> ?north/);
   });
 
@@ -212,7 +256,7 @@ describe('Zork page', () => {
 
     it('draws the current place again with the description when Redraw picture is pressed', async () => {
       await boot();
-      await type('open mailbox');
+      await type('look');
       expect(fake.images.length).toBe(1);
       edit('I am a woman adventurer dressed for a day of hiking.');
       q('[data-act="retry"]').click();
