@@ -75,6 +75,17 @@ describe('page text', () => {
     expect(text()).toMatch(/description of each place[^.]*art style[^.]*OpenRouter[^.]*provider/i);
     expect(text()).toMatch(/commands are not/i);
   });
+  it('says the optional description of yourself is sent with each picture request, and commands still are not', () => {
+    expect(text()).toMatch(/description of yourself[^.]*sent[^.]*OpenRouter[^.]*provider/i);
+    expect(text()).toMatch(/Your commands are not/);
+  });
+  it('has a labelled description box limited to 500 characters', () => {
+    const $ = html(PAGE);
+    const box = $('textarea[data-player-prompt]');
+    expect(box.length).toBe(1);
+    expect(box.attr('maxlength')).toBe('500');
+    expect($(`label[for="${box.attr('id')}"]`).text()).toMatch(/About you and how it should look/);
+  });
   it("says the key is the player's own and stays in the browser", () => {
     expect(text()).toMatch(/your own OpenRouter/i);
     expect(text()).toMatch(/Kept in this browser only and sent to openrouter\.ai alone/);

@@ -1,0 +1,242 @@
+[
+  {
+    "id": "mailbox-opened",
+    "roomId": "west of house",
+    "when": "opening the small mailbox reveals",
+    "prompt": "Same view of the field and the white house, but the small mailbox beside the door now stands open with its lid hanging down, and a folded sheet of paper is visible inside."
+  },
+  {
+    "id": "window-opened",
+    "roomId": "behind house",
+    "when": "open the window far enough to allow entry",
+    "prompt": "Same view behind the white house, but the small window in the corner is now pushed wide open, its dark kitchen interior showing and a pale curtain stirring in the breeze."
+  },
+  {
+    "id": "leaves-grating-revealed",
+    "roomId": "clearing",
+    "when": "a grating is revealed",
+    "prompt": "Same forest clearing, but the pile of dead leaves has been scattered aside, revealing a heavy rusted iron grating set securely into the ground, with darkness showing between its bars."
+  },
+  {
+    "id": "grating-opened-above",
+    "roomId": "clearing",
+    "when": "the grating opens\\.",
+    "prompt": "Same forest clearing, but the heavy iron grating in the ground now stands swung wide open, showing a black square opening and the first few stone steps leading down into darkness."
+  },
+  {
+    "id": "grating-unlocked",
+    "roomId": "grating room",
+    "when": "the grate is unlocked",
+    "prompt": "Same small cave room, but the heavy lock on the iron grating overhead now hangs open and loose, with the grating ready to push up and a thin line of daylight along its edge."
+  },
+  {
+    "id": "grating-opened-below",
+    "roomId": "grating room",
+    "when": "grating opens to reveal trees above you",
+    "prompt": "Same small cave room, but the iron grating in the ceiling is now swung open, and bright daylight pours down through the square opening, with green tree branches and sky visible above."
+  },
+  {
+    "id": "rug-moved",
+    "roomId": "living room",
+    "when": "rug is moved to one side of the room",
+    "prompt": "Same living room, but the large oriental rug is now shoved to one side in a heavy bunched fold, revealing a square wooden trap door with an iron ring set into the dusty floorboards where it lay."
+  },
+  {
+    "id": "trap-door-opened",
+    "roomId": "living room",
+    "when": "door reluctantly opens to reveal a rickety staircase",
+    "prompt": "Same living room with the rug pushed aside, but the square trap door in the floor now stands open, revealing a rickety wooden staircase that descends into complete blackness."
+  },
+  {
+    "id": "lamp-lit-cellar",
+    "roomId": "cellar",
+    "when": "brass lantern is now on",
+    "prompt": "Same dark stone cellar, but now lit by the warm yellow glow of a brass lantern held low, showing wet rough walls, the narrow passage north, the low crawlway south and the steep smooth metal ramp, with deep shadows beyond the light."
+  },
+  {
+    "id": "lamp-lit-troll-room",
+    "roomId": "the troll room",
+    "when": "brass lantern is now on",
+    "prompt": "Same small grim stone chamber, but now lit by the warm yellow glow of a brass lantern, showing deep scratches and stains on the rough walls, the passages east and south and the ragged black hole in the west wall."
+  },
+  {
+    "id": "lamp-lit-east-of-chasm",
+    "roomId": "east of chasm",
+    "when": "brass lantern is now on",
+    "prompt": "Same narrow ledge beside the huge chasm, but now lit by the warm yellow glow of a brass lantern, showing wet rock and the path along the cliff, while the drop beside it still fades into blackness."
+  },
+  {
+    "id": "lamp-lit-studio",
+    "roomId": "studio",
+    "when": "brass lantern is now on",
+    "prompt": "Same artist's studio, but now lit by the warm yellow glow of a brass lantern, bringing out the splashes of vivid color on the walls and floor, the cold fireplace with its narrow chimney and the paint-smeared open door."
+  },
+  {
+    "id": "lamp-lit-grating-room",
+    "roomId": "grating room",
+    "when": "brass lantern is now on",
+    "prompt": "Same small cave room, but now lit by the warm yellow glow of a brass lantern, showing the rough stone walls, the twisting passage opening and the heavy iron grating in the ceiling above."
+  },
+  {
+    "id": "lamp-lit-cyclops-room",
+    "roomId": "cyclops room",
+    "when": "brass lantern is now on",
+    "prompt": "Same tall rough-walled cavern, but now lit by the warm yellow glow of a brass lantern, showing the worn stone staircase, the gouged walls and the northwest exit, with shadows pulled back to the corners."
+  },
+  {
+    "id": "lamp-lit-round-room",
+    "roomId": "round room",
+    "when": "brass lantern is now on",
+    "prompt": "Same circular stone room, but now lit by the warm yellow glow of a brass lantern, showing the high domed ceiling, the curved walls, the passages in every direction and the heaps of fallen rock blocking some of them."
+  },
+  {
+    "id": "lamp-lit-egyptian-room",
+    "roomId": "egyptian room",
+    "when": "brass lantern is now on",
+    "prompt": "Same tomb-like chamber, but now lit by the warm yellow glow of a brass lantern, making the carved figures on the walls glow in faded yellow and blue and showing the decorated stone sarcophagus in the middle of the floor."
+  },
+  {
+    "id": "lamp-lit-atlantis-room",
+    "roomId": "atlantis room",
+    "when": "brass lantern is now on",
+    "prompt": "Same ancient drowned chamber, but now lit by the warm yellow glow of a brass lantern, showing the mineral-streaked carved walls, the fine silt floor, the staircase going up and the exit to the south."
+  },
+  {
+    "id": "lamp-lit-loud-room",
+    "roomId": "loud room",
+    "when": "brass lantern is now on",
+    "prompt": "Same huge echoing chamber, but now lit by the warm yellow glow of a brass lantern, showing the smooth curved walls, the narrow east-west passage and the wide stone stairway, with the ceiling lost in darkness."
+  },
+  {
+    "id": "lamp-lit-coal-mine",
+    "roomId": "coal mine",
+    "when": "brass lantern is now on",
+    "prompt": "Same nondescript coal mine tunnel, but now lit by the warm yellow glow of a brass lantern, showing the rough black walls, rotting timber props, chunks of coal on the floor and tunnels leading off into the dark."
+  },
+  {
+    "id": "lamp-lit-machine-room",
+    "roomId": "machine room",
+    "when": "brass lantern is now on",
+    "prompt": "Same large cold stone room, but now lit by the warm yellow glow of a brass lantern, showing the big machine like a clothes dryer in the corner with its large lid and small switch, and the pipes and dust around it."
+  },
+  {
+    "id": "troll-killed",
+    "roomId": "the troll room",
+    "when": "troll breathes his last breath|carcass disappears in a sinister black fog",
+    "prompt": "Same lit stone chamber, but a last wisp of black fog is curling across the floor and fading away, and the room is now empty and still, with the passages east and west standing clear and open."
+  },
+  {
+    "id": "cyclops-flees",
+    "roomId": "cyclops room",
+    "when": "flees the room by knocking down the wall",
+    "prompt": "Same tall cavern, but the east wall has been smashed open into a large jagged doorway with broken stone rubble and dust on the floor, and a long passage is visible beyond. The huge creature is gone."
+  },
+  {
+    "id": "cyclops-asleep",
+    "roomId": "cyclops room",
+    "when": "falls fast asleep",
+    "prompt": "Same tall cavern, but a huge one-eyed giant now lies slumped fast asleep at the foot of the staircase with his head on his chest, an empty glass bottle on the floor beside him, completely still."
+  },
+  {
+    "id": "dam-gates-open",
+    "roomId": "dam",
+    "when": "sluice gates open and water pours",
+    "prompt": "Same view of the top of the dam, but the sluice gates at its base are now open and white water roars through them in a thick plume of spray, while the level of the reservoir behind begins to fall."
+  },
+  {
+    "id": "dam-gates-closed",
+    "roomId": "dam",
+    "when": "sluice gates close and water starts to collect",
+    "prompt": "Same view of the top of the dam, but the sluice gates are now shut tight, the roaring water has stopped, and the reservoir behind the dam is calm and slowly rising."
+  },
+  {
+    "id": "boat-inflated",
+    "roomId": "dam base",
+    "when": "boat inflates and appears seaworthy",
+    "prompt": "Same view at the base of the dam, but a sturdy bright yellow inflatable boat now sits fully inflated at the water's edge on the rocky shore, with a small hand pump beside it, ready to launch."
+  },
+  {
+    "id": "reservoir-south-drained",
+    "roomId": "reservoir south",
+    "when": "merely a wide stream running through the center of the room",
+    "prompt": "Same long cavern, but the lake to the north has drained away, leaving a wide expanse of wet gleaming mud with only a slender stream winding through the middle of it."
+  },
+  {
+    "id": "reservoir-north-drained",
+    "roomId": "reservoir north",
+    "when": "merely a wide stream running through there",
+    "prompt": "Same large cavern, but the lake to the south has drained away, leaving a wide expanse of wet gleaming mud with only a slender stream winding through the middle of it."
+  },
+  {
+    "id": "reservoir-drained",
+    "roomId": "reservoir",
+    "when": "now a large mud pile",
+    "prompt": "Same vast cavern, but the lake is gone and the viewer stands on a broad, glistening mud flat with a few puddles, the pale shores far to the north and south, and the great dam looming in the distance."
+  },
+  {
+    "id": "rainbow-solid-falls",
+    "roomId": "aragain falls",
+    "when": "rainbow appears to become solid",
+    "prompt": "Same view at the top of the falls, but the rainbow now looks solid and glowing, a wide bright arch of banded color with firm steps leading onto it that could carry a walker out over the falls."
+  },
+  {
+    "id": "rainbow-solid-end",
+    "roomId": "end of rainbow",
+    "when": "rainbow appears to become solid",
+    "prompt": "Same rocky beach below the falls, but the rainbow now looks solid and glowing, a wide bright arch of banded color, and a small black iron pot brimming with shining gold coins sits at the foot of the rainbow."
+  },
+  {
+    "id": "hades-bell-hot",
+    "roomId": "entrance to hades",
+    "when": "bell suddenly becomes red hot",
+    "prompt": "Same dark cavern and black gateway, but a small brass bell now lies on the stone floor glowing bright red-hot, with heat shimmer and wisps of smoke rising from it, and the drifting mist is pulled back around it."
+  },
+  {
+    "id": "hades-spirits-flee",
+    "roomId": "entrance to hades",
+    "when": "spirits, sensing a greater power, flee through the walls",
+    "prompt": "Same dark cavern and tall black gateway, but the pale spectral shapes are streaming away into the rock walls, the mist is thinning, and the way through the open gate now lies clear and quiet."
+  },
+  {
+    "id": "dome-rope-tied",
+    "roomId": "dome room",
+    "when": "rope drops over the side and comes within ten feet",
+    "prompt": "Same narrow walkway around the dome, but a thick coil of rope is now tied to the wooden railing and hangs straight down over the edge into the shadowy round room far below."
+  },
+  {
+    "id": "torch-room-rope-below",
+    "roomId": "torch room",
+    "when": "piece of rope descends from the railing above",
+    "prompt": "Same round room under the high dome, but a thick rope now hangs down from the wooden railing twenty feet up and ends in the air about five feet above the floor, beside the white marble pedestal."
+  },
+  {
+    "id": "mirror-broken",
+    "roomId": "mirror room",
+    "when": "you have broken the mirror",
+    "prompt": "Same large square room, but the enormous mirror on the south wall is now shattered into jagged glittering shards that still cling to the frame, with bright fragments scattered across the dusty floor."
+  },
+  {
+    "id": "maintenance-leak",
+    "roomId": "maintenance room",
+    "when": "stream of water appears to burst from the east wall",
+    "prompt": "Same ransacked maintenance room, but a strong jet of water is now spraying from a cracked pipe in the east wall, splashing across the concrete floor and spreading in a shallow, widening puddle."
+  },
+  {
+    "id": "thief-dies",
+    "roomId": "treasure room",
+    "when": "as the thief dies, the power of his magic decreases",
+    "prompt": "Same large stone room, but glittering objects have appeared in a scattered heap on the floor: a silver chalice, jeweled ornaments and gleaming coins, catching the light."
+  },
+  {
+    "id": "sandy-cave-scarab",
+    "roomId": "sandy cave",
+    "when": "you can see a scarab here in the sand",
+    "prompt": "Same sand-filled cave, but a small hole has been scooped out of the sand floor, and the jeweled shape of a beetle ornament glints from the bottom of the hole."
+  },
+  {
+    "id": "machine-runs",
+    "roomId": "machine room",
+    "when": "machine comes to life",
+    "prompt": "Same large cold room, but the big machine in the corner is now shaking and flashing a dazzling display of multicolored lights that wash the walls and floor in shifting red, green and blue."
+  }
+]

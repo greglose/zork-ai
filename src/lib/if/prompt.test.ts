@@ -46,3 +46,82 @@ describe('prompt builder', () => {
     });
   });
 });
+
+describe('player description in prompts', () => {
+  const me = 'I am a woman adventurer dressed for a day of hiking. I wish to explore a colorful cartoon version of this game.';
+  const video = { game: 'zork' as const, styleId: 'cartoon', roomName: 'West of House', event: { kind: 'death' as const, text: 't' } };
+
+  it('is_byte_identical_when_missing_empty_or_blank', () => {
+    const plain = buildImagePrompt(base);
+    expect(buildImagePrompt({ ...base, playerPrompt: '' })).toBe(plain);
+    expect(buildImagePrompt({ ...base, playerPrompt: '  \n ' })).toBe(plain);
+    const plainVideo = buildVideoPrompt(video);
+    expect(buildVideoPrompt({ ...video, playerPrompt: '' })).toBe(plainVideo);
+    expect(buildVideoPrompt({ ...video, playerPrompt: '   ' })).toBe(plainVideo);
+  });
+  it('adds_a_delimited_block_after_style_and_bible_and_before_the_place', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: me });
+    const style = STYLES.find((x) => x.id === 'cartoon')!.prefix;
+    const at = (s: string) => p.indexOf(s);
+    expect(at(style)).toBe(0);
+    expect(at(BIBLES.zork)).toBeGreaterThan(at(style));
+    expect(at(me)).toBeGreaterThan(at(BIBLES.zork));
+    expect(at('Place: West of House.')).toBeGreaterThan(at(me));
+    expect(p).toMatch(/-{3} Player description -{3}\n[^\n]*hiking[^\n]*\n-{3} End of player description -{3}/);
+  });
+  it('tells_the_model_how_to_use_it', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: me });
+    expect(p).toMatch(/follow the description[^\n]*appearance/i);
+    expect(p).toMatch(/different art look[^\n]*priority/i);
+    expect(p).toMatch(/from behind or at the edge of the frame/i);
+    expect(p).toMatch(/no text or captions/i);
+  });
+  it('is_in_video_prompts_too', () => {
+    const v = buildVideoPrompt({ ...video, playerPrompt: me });
+    expect(v).toContain(me);
+    expect(v.indexOf(me)).toBeLessThan(v.indexOf('Moment:'));
+    expect(v).toMatch(/no text or captions/i);
+  });
+  it('keeps_non_ascii_player_text_but_the_rest_stays_ascii', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: 'Soy \u00e1gil' });
+    expect(p).toContain('Soy \u00e1gil');
+    expect(p.replace('Soy \u00e1gil', '')).toMatch(/^[\x20-\x7e\n]*$/);
+  });
+  it('is_cleaned_and_capped_even_when_given_raw', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: 'x'.repeat(900) + '\u0000' });
+    expect(p).toContain('x'.repeat(500));
+    expect(p).not.toContain('x'.repeat(501));
+  });
+});
+
+describe('scene changes and darkness in image prompts', () => {
+  it('is_byte_identical_without_changes_or_darkness', () => {
+    expect(buildImagePrompt({ ...base, changes: [] })).toBe(buildImagePrompt(base));
+    expect(buildImagePrompt({ ...base, dark: false })).toBe(buildImagePrompt(base));
+  });
+  it('adds_each_change_after_the_scene_in_order', () => {
+    const p = buildImagePrompt({ ...base, changes: ['Same view, but the rug is moved.', 'Same view, but the trap door is open.'] });
+    const lines = p.split('\n');
+    expect(lines.slice(-3)).toEqual([
+      `Scene: ${base.text}`,
+      'Change: Same view, but the rug is moved.',
+      'Change: Same view, but the trap door is open.',
+    ]);
+  });
+  it('keeps_changes_ascii_and_capped', () => {
+    const p = buildImagePrompt({ ...base, changes: ['Caf\u00e9 ' + 'b'.repeat(900)] });
+    expect(p).toContain('b'.repeat(590));
+    expect(p).not.toContain('b'.repeat(601));
+    expect(/^[\x20-\x7e\n]*$/.test(p)).toBe(true);
+  });
+  it('says_so_when_the_place_is_dark', () => {
+    const p = buildImagePrompt({ ...base, dark: true });
+    expect(p).toMatch(/Lighting: .*darkness/);
+    expect(p.indexOf('Lighting:')).toBeGreaterThan(p.indexOf('Scene:'));
+  });
+  it('puts_the_player_block_before_the_place_and_the_changes_after_the_scene', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: 'I am a hiker', changes: ['Same view, but x.'] });
+    expect(p.indexOf('I am a hiker')).toBeLessThan(p.indexOf('Place:'));
+    expect(p.indexOf('Change:')).toBeGreaterThan(p.indexOf('Scene:'));
+  });
+});

@@ -111,3 +111,27 @@ describe('settings storage', () => {
     expect(() => writeSettings(undefined, defaultSettings())).not.toThrow();
   });
 });
+
+describe('game save moments', () => {
+  it('roundtrips_the_fired_moment_ids', () => {
+    const m = memory();
+    writeGameSave(m, { styleId: null, bytes: new Uint8Array([1]), moments: ['rug-moved', 'lamp-lit-cellar'] });
+    expect(loadGameSave(m).moments).toEqual(['rug-moved', 'lamp-lit-cellar']);
+  });
+  it('is_absent_when_nothing_was_saved_or_the_field_is_junk', () => {
+    const m = memory();
+    writeGameSave(m, { styleId: null, bytes: new Uint8Array([1]) });
+    expect(loadGameSave(m).moments).toBeUndefined();
+    for (const junk of [5, 'x', null, {}, [1, 2], ['Bad Id', 'ok-id', 'x|y', 7]]) {
+      m.data[GAME_SAVE_KEY] = JSON.stringify({ version: 1, styleId: null, bytes: null, moments: junk });
+      const got = loadGameSave(m).moments;
+      expect(got === undefined || (Array.isArray(got) && got.every((i) => /^[a-z0-9-]+$/.test(i)))).toBe(true);
+    }
+    expect(loadGameSave(m).moments).toEqual(['ok-id']);
+  });
+  it('is_capped_at_200_ids', () => {
+    const m = memory();
+    m.data[GAME_SAVE_KEY] = JSON.stringify({ version: 1, styleId: null, bytes: null, moments: Array.from({ length: 500 }, (_, i) => `m${i}`) });
+    expect(loadGameSave(m).moments).toHaveLength(200);
+  });
+});

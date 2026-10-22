@@ -1,0 +1,286 @@
+{
+  "west of house": {
+    "prompt": "An open grassy field in front of a white clapboard house with a boarded front door and boarded windows. A small mailbox stands near the door. Tall dark forest rises behind the viewer and to either side, and an overcast daylight sky hangs over the quiet, lonely scene."
+  },
+  "stone barrow": {
+    "prompt": "A grassy hillside at the edge of the forest, with a massive barrow of heavy grey stone built into it. A huge slab doorway in the east face stands open onto absolute blackness. Pale light, mossy rocks and tall trees surround it."
+  },
+  "north of house": {
+    "prompt": "The blank north wall of a white clapboard house with every window boarded over and no door. Weeds and low shrubs crowd the foundation. A narrow dirt path leads away north into dense dark trees, and a pale sky shows through the branches."
+  },
+  "south of house": {
+    "prompt": "The blank south wall of a white clapboard house with all its windows boarded up and no door. Overgrown grass and bushes press against the foundation, and thick forest closes in at the edge of the yard. Muted daylight, quiet and slightly lonely."
+  },
+  "behind house": {
+    "prompt": "The back of a white clapboard house, with a small window in one corner standing slightly open. A worn path leads east into the forest between tall trees. Wild grass grows along the wall and soft light filters down through the leaves."
+  },
+  "forest": {
+    "prompt": "A dim forest of large old trees all around, with thick trunks, tangled undergrowth and a carpet of fallen leaves. Narrow shafts of pale sunlight break through the canopy in places. No clear path is visible, and the mood is hushed and slightly confusing."
+  },
+  "forest path": {
+    "prompt": "A dirt path winding through a dim forest and running north to south. One especially large tree with low sturdy branches stands at the edge of the path, easy to climb. Dappled light falls through the canopy onto the leaf-strewn ground."
+  },
+  "up a tree": {
+    "prompt": "A view from about ten feet up among the large branches of a big tree, looking down through leaves to a forest path below. Thick bark and crooked limbs fill the frame. Soft green light filters through the canopy. Bright patches of sky show between the leaves."
+  },
+  "clearing": {
+    "prompt": "A small clearing in the forest, ringed by tall trees on every side. A pile of dead brown leaves lies in the middle of the grass. A narrow path leads away from the clearing between the trunks, and sunlight falls in a pale circle on the ground."
+  },
+  "kitchen": {
+    "prompt": "The kitchen of an old white house, with a wooden table covered in the leftovers of a meal. A small window on one wall stands open to daylight. A doorway leads west, a dark staircase climbs up, and a dark chimney opening sits in the corner."
+  },
+  "attic": {
+    "prompt": "A cramped, dusty attic under a steeply sloped roof, with bare rafters, cobwebs and heaps of old crates and bundles. A dim stairway opening in the floor leads down. Thin, weak light enters through gaps in the roof boards. Everything is silent and a little spooky.",
+    "dark": true
+  },
+  "living room": {
+    "prompt": "A cozy, old-fashioned living room with a large oriental rug in the center of a worn wooden floor and a glass trophy case against one wall. A doorway leads east, and a heavy wooden door in the west wall is nailed shut. Warm, dim light."
+  },
+  "cellar": {
+    "prompt": "A dark, damp stone cellar with rough walls and a narrow passage leading north. A low crawlway opens in the south wall, and a steep smooth metal ramp rises on the west side. Shadows pool in the corners and water glistens on the floor.",
+    "dark": true
+  },
+  "the troll room": {
+    "prompt": "A small, grim stone chamber with passages leading east and south and a ragged black hole in the west wall. Deep scratches and dark stains mar the rough walls. Scraps of old rubble lie on the dusty floor. The air is cold and still.",
+    "dark": true
+  },
+  "east of chasm": {
+    "prompt": "A narrow rock ledge on the east edge of a huge chasm whose bottom disappears in blackness. The path continues east along the cliff, and a passage leads north. Cold air rises from the abyss, and rough wet stone fills the frame.",
+    "dark": true
+  },
+  "gallery": {
+    "prompt": "A large, high-ceilinged gallery hall with bare walls where many framed works once hung. Empty hooks and pale rectangles mark the missing pictures, and a few stray frames remain. Exits open to the north and west. Soft, even light. Faint footprints cross the dusty floor."
+  },
+  "studio": {
+    "prompt": "An artist's studio with walls and floor splattered with paint in dozens of colors, a cold fireplace with a dark narrow chimney rising above it, and an open door at the south end that is also smeared with paint. Quiet and a little messy.",
+    "dark": true
+  },
+  "maze": {
+    "prompt": "A cramped maze of twisty little passages, all alike. Narrow, rough-hewn stone corridors branch in several directions with identical grey walls, low ceilings and floors of packed dirt. Dim light, no landmarks, and a feeling of being lost. Every turn looks exactly like the last.",
+    "dark": true
+  },
+  "dead end": {
+    "prompt": "A short, cramped stone passage that ends in a solid wall of rough rock, with nothing beyond. The ceiling is low and the floor is covered in dust and pebbles. The only way out is the way back, and the air is still and close.",
+    "dark": true
+  },
+  "grating room": {
+    "prompt": "A small cave room just off the maze, with rough stone walls and floor. In the ceiling directly overhead is a heavy iron grating with a thick lock, with faint daylight leaking through the bars. Twisting passages lead off into the shadows.",
+    "dark": true
+  },
+  "cyclops room": {
+    "prompt": "A tall, rough-walled cavern with an exit to the northwest and a wide staircase of worn stone climbing up on one side. Dark stains and deep gouges mark the walls, and rubble lies scattered across the floor. The air is heavy and the light is dim.",
+    "dark": true
+  },
+  "strange passage": {
+    "prompt": "A long, plain stone passage with one entrance at the west end. At the east end is an old wooden door with a huge round-topped opening in it, far taller than a person. Cool, still air and flat grey light.",
+    "dark": true
+  },
+  "treasure room": {
+    "prompt": "A large, high-ceilinged stone room whose east wall is solid granite. Discarded bags that have crumbled into dust and tatters lie scattered across the floor. A staircase leads down at one side. Shadows gather in the corners and the air feels hidden and secretive.",
+    "dark": true
+  },
+  "reservoir south": {
+    "prompt": "The south shore of a huge underground lake in a long cavern, with dark still water stretching away to the north beyond a rim of wet rock. Narrow paths run east and west along the shore, a steep path climbs southwest beside a chasm, and a canyon opens to the southeast.",
+    "dark": true
+  },
+  "reservoir": {
+    "prompt": "The open surface of a large underground lake in a vast cavern, black water rippling gently with pale beaches visible far to the north and south. A narrow cleft in the rocks at one side lets a small stream enter, and a great concrete dam looms downstream in the distance.",
+    "dark": true
+  },
+  "reservoir north": {
+    "prompt": "A large cavernous chamber on the north shore of a wide underground lake, with a damp rocky beach and dark water lapping to the south. A slimy stone stairway climbs out of the cavern at the north end. Cool misty light and echoing space.",
+    "dark": true
+  },
+  "stream view": {
+    "prompt": "A path beside a gently flowing stream in a rocky cavern, with clear water running from west to east. At the west end the stream pours out of a gap far too small to enter. Smooth stones line the bank and pale light shimmers on the ripples.",
+    "dark": true
+  },
+  "stream": {
+    "prompt": "A small boat's-eye view down a gently flowing stream between steep rock walls that twist out of sight in both directions. Clear shallow water ripples over pebbles, and a narrow strip of beach lies to one side where a landing is possible.",
+    "dark": true
+  },
+  "mirror room": {
+    "prompt": "A large square room with tall ceilings and bare stone walls. An enormous mirror fills the entire south wall, reflecting the room back at itself in cold light. Exits open in the other three walls, and the floor is smooth and dusty."
+  },
+  "cave": {
+    "prompt": "A tiny rough cave with a low ceiling and entrances to the west and north. A narrow staircase of rough stone leads down into darkness at one side. Damp walls glisten faintly and the space feels cramped and echoing. A cold draft rises from the stairs.",
+    "dark": true
+  },
+  "cold passage": {
+    "prompt": "A cold, damp stone corridor where a long east-west passageway bends into a path heading south. Frost glints on the rough walls and the floor is wet. Faint grey light, a chill in the air, and a feeling of long emptiness.",
+    "dark": true
+  },
+  "narrow passage": {
+    "prompt": "A long, very narrow north-south stone corridor that pinches even tighter in the middle, so that the rough walls almost brush the viewer on both sides. A faint draft moves through it and the light is dim. Pebbles and dust cover the floor, and the way ahead fades into shadow.",
+    "dark": true
+  },
+  "winding passage": {
+    "prompt": "A winding stone passage that curves and turns back on itself, with rough walls and a low ceiling. Exits lead east and north. Small ledges hold dust and pebbles, and the dim light shifts around each bend. Pebbles and dust cover the floor, and the way ahead fades into shadow.",
+    "dark": true
+  },
+  "twisting passage": {
+    "prompt": "A twisting stone passage that curls and doubles back, narrow and low, with rough dusty walls. Openings lead off to the east and north. The light is faint and the shadows seem to move around each turn. Pebbles and dust cover the floor, and the way ahead fades into shadow.",
+    "dark": true
+  },
+  "atlantis room": {
+    "prompt": "An ancient chamber that was long ago under water, with smooth carved stone walls streaked with mineral stains and a floor of fine silt. A staircase leads up at one side and an exit opens to the south. Strange pale light and a drowned, silent mood.",
+    "dark": true
+  },
+  "east-west passage": {
+    "prompt": "A narrow, straight east-west stone passageway with rough walls close on both sides. At the north end a narrow stairway descends into shadow. Dust lies thick on the floor and the light is dim and even. The ceiling is low, the walls are rough, and the passage fades into shadow at both ends.",
+    "dark": true
+  },
+  "round room": {
+    "prompt": "A large circular stone room with a high domed ceiling and passages leading off in every direction, several of them blocked by heaps of fallen rock. The floor is smooth and dusty and the walls curve all around the viewer.",
+    "dark": true
+  },
+  "deep canyon": {
+    "prompt": "The south edge of a deep rocky canyon, with steep walls dropping away and passages leading east, northwest and southwest. A stone stairway winds down along the wall into mist. The sound of distant water echoes up from below. The rock is banded in red and brown, and the light is dim.",
+    "dark": true
+  },
+  "damp cave": {
+    "prompt": "A damp cave with exits to the west and east and a narrow crack in the wall toward the south. The floor is slick and glistening, droplets fall from the ceiling, and moist dark earth coats everything. Dim, cold and dripping.",
+    "dark": true
+  },
+  "loud room": {
+    "prompt": "A very large chamber with a ceiling too high to see, smooth curved stone walls and a narrow passage running east to west. A wide stone stairway climbs upward at one end. The walls look as if they would echo every sound.",
+    "dark": true
+  },
+  "north-south passage": {
+    "prompt": "A high, narrow north-south passage in dark stone that forks toward the northeast. The walls rise out of sight overhead and the floor is dusty and uneven. Dim light, cold air and long shadows. Pebbles and dust cover the floor, and the passage fades into shadow at both ends.",
+    "dark": true
+  },
+  "chasm": {
+    "prompt": "A narrow rock path running along the south side of a deep chasm that cuts from the southwest to the northeast. A crack in the wall opens into a passage, and the far side of the drop disappears in blackness. Cold air and rough stone.",
+    "dark": true
+  },
+  "entrance to hades": {
+    "prompt": "A vast dark cavern with a tall, ominous gateway of black stone standing open to a gloomy beyond. A pile of dim shapes lies in one corner past the gate and a faint reddish glow and drifting mist hang in the air. Bleak and foreboding."
+  },
+  "land of the dead": {
+    "prompt": "A bleak, gloomy hall of dark stone beyond a great gateway, with stacked piles of old gear and rubble in one corner. Pale mist drifts along the floor, a passage exits to the north, and everything is colored in cold shadow."
+  },
+  "engravings cave": {
+    "prompt": "A low cave with a rough ceiling and passages leading northwest and east. Faint carved grooves cover the smooth part of one wall, worn almost flat by age. Dust, pebbles and dim, still air fill the space. The floor is covered in fine grit.",
+    "dark": true
+  },
+  "egyptian room": {
+    "prompt": "A chamber that looks like an Egyptian tomb, with walls covered in carved carved figures and patterns in faded yellow and blue. An ascending staircase leads out to the west. A richly decorated stone sarcophagus rests in the middle of the floor.",
+    "dark": true
+  },
+  "dome room": {
+    "prompt": "A narrow stone walkway circling the edge of a large dome, protected by a sturdy wooden railing. Below, a great round room drops away into shadow. The curved ceiling arches overhead and the air is cool and echoing. Far below, the floor of the lower room is barely visible.",
+    "dark": true
+  },
+  "torch room": {
+    "prompt": "A large round room under a high dome, with a prominent doorway leading to a staircase going down. About twenty feet up, a wooden railing circles the edge of the dome. In the center of the floor sits a white marble pedestal.",
+    "dark": true
+  },
+  "temple": {
+    "prompt": "The north end of a large ancient temple, with huge marble pillars marking the exit and a worn carved panel on the east wall. A staircase leads down at the base of the panel. The west wall is solid granite, and the stone is cold and grand."
+  },
+  "altar": {
+    "prompt": "The south end of a large ancient temple, with a plain stone altar standing in front of the viewer. In one corner is a small hole in the floor that leads into darkness. Marble pillars rise into shadow and the stone is cold and hushed."
+  },
+  "dam": {
+    "prompt": "The top of a huge concrete dam, a flood control structure, with a broad walkway and paths leading north, south and west plus a scramble down the far side. Behind it is a vast reservoir. A control panel with a large metal bolt and a small bubble stands on the walkway."
+  },
+  "dam lobby": {
+    "prompt": "An old waiting room for tour groups at a dam, with bare concrete walls, worn benches and faded display boards. Open doorways lead north and east, and a path leads south over the top of the dam. Stale air, dust and flat institutional light."
+  },
+  "maintenance room": {
+    "prompt": "A ransacked maintenance room in a dam, with bare shelves, dented cabinets and tools scattered across a concrete floor. On the wall in front of the viewer is a panel of four buttons colored blue, yellow, brown and red. Doorways lead west and south.",
+    "dark": true
+  },
+  "dam base": {
+    "prompt": "The base of a towering concrete dam that looms above to the north, with the cold Frigid River flowing past a rocky shore. Tall white cliffs form giant walls along both banks of the winding river. Spray hangs in the air and the light is bright and clean."
+  },
+  "frigid river": {
+    "prompt": "A wide, cold river flowing quietly between towering white cliffs, with a rocky shore on either side. The water is smooth and grey-green, the canyon walls rise steeply, and the current carries the viewer onward downstream under a strip of open sky."
+  },
+  "white cliffs beach": {
+    "prompt": "A narrow strip of beach along the foot of enormous white cliffs, with pebbles, driftwood and a narrow path running along the shore. A tight dark passage leads into the cliff face. The river glides past, and the cliffs tower overhead in bright light.",
+    "dark": true
+  },
+  "shore": {
+    "prompt": "The east shore of a fast river, with a path running north and south along the water's edge and the south end turning a sharp corner around the rocks. The water looks treacherous and swift. Wet stones, tall grass and open sky."
+  },
+  "sandy beach": {
+    "prompt": "A large, wide sandy beach on the east shore of a swiftly flowing river, with a path running south beside the water. A passage in the rock to the northeast is partly buried in drifted sand. Bright sun, pale sand and rushing water.",
+    "dark": true
+  },
+  "sandy cave": {
+    "prompt": "A small cave filled with soft drifted sand, the floor sloping up toward a narrow opening in the southwest. The sand is pale and fine, fresh ripples show the lightest touch of air, and the light is dim and warm.",
+    "dark": true
+  },
+  "aragain falls": {
+    "prompt": "The top of an enormous waterfall with a drop of hundreds of feet, the river thundering over a wide stone lip into a canyon filled with mist. A beautiful rainbow arcs over the falls to the west. The only path is on the north side."
+  },
+  "on the rainbow": {
+    "prompt": "A walkway on top of a rainbow of shimmering color arching high over a huge waterfall, with a magnificent view of the falls, spray and the canyon below. The rainbow runs east to west, glowing against a bright sky. Mist drifts up from the water far below."
+  },
+  "end of rainbow": {
+    "prompt": "A small rocky beach on the river just past the falls, with a narrow strip of sand squeezed by high white cliffs. The canyon opens overhead and sunlight pours in. A rainbow crosses the falls to the east and a narrow path leads southwest."
+  },
+  "canyon bottom": {
+    "prompt": "The floor of a great river canyon, beneath towering rock walls that may be climbable. A lesser stream of runoff from the falls flows past below the viewer, and a narrow path leads north. Mist, wet rock and a strip of bright sky overhead."
+  },
+  "rocky ledge": {
+    "prompt": "A narrow ledge about halfway up the wall of a river canyon, with the canyon bottom far below and more climbable cliff above. The main flow from a waterfall twists into a rocky passage too narrow to enter. Wind, mist and bright sky."
+  },
+  "canyon view": {
+    "prompt": "The top of the Great Canyon on its west wall, with a marvelous view over the river far below and white cliffs and mountains across the way. A rainbow and a waterfall are visible upstream to the north, and an immense forest stretches around the viewer."
+  },
+  "mine entrance": {
+    "prompt": "The entrance of an old coal mine, with a timber-framed shaft opening into the west wall and another exit at the south end of the room. Black coal dust coats the floor and rough walls, and rotted wooden props lean overhead. Dim, gritty light.",
+    "dark": true
+  },
+  "squeaky room": {
+    "prompt": "A small bare stone room with exits to the east and a passage at the north end from which strange squeaking sounds seem to come. Dust lies on the floor and the air is stale. Dim, cramped and a little unsettling.",
+    "dark": true
+  },
+  "bat room": {
+    "prompt": "A small, grimy cave room with doors only to the east and south. The ceiling is low and spattered, heaped with dark droppings, and the floor is covered with debris. Dim, musty light and a restless, uneasy feeling. Tiny claw marks scratch the walls.",
+    "dark": true
+  },
+  "shaft room": {
+    "prompt": "A large chamber in a mine, in the middle of which a small shaft descends through the floor into darkness. A metal framework stands over the top of the shaft with a heavy iron chain attached. Exits lead west and north. Dust and coal grime everywhere.",
+    "dark": true
+  },
+  "smelly room": {
+    "prompt": "A small nondescript room in a mine, with a narrow tunnel to the south and a small descending staircase from which a foul smell drifts up. The rock walls are black with coal dust and the air feels heavy and stale.",
+    "dark": true
+  },
+  "gas room": {
+    "prompt": "A small mine room that smells strongly of coal gas, with a short climb up some stairs and a narrow tunnel leading east. The walls are black and rough and the air looks faintly hazy in the dim light. A faint chill clings to the stone.",
+    "dark": true
+  },
+  "ladder top": {
+    "prompt": "A very small mine room with a rickety wooden ladder standing in the corner and leading downward into darkness. A staircase also leads upward. The walls are black with coal dust and the timbers look old and fragile. The air is thick and close.",
+    "dark": true
+  },
+  "ladder bottom": {
+    "prompt": "A rather wide mine room with the bottom of a narrow wooden ladder on one side. Passages lead away to the west and the south. The floor is thick with coal dust, rotten timbers support the ceiling and the light is dim.",
+    "dark": true
+  },
+  "timber room": {
+    "prompt": "A long, narrow mine passage cluttered with broken timbers and splintered beams. A wide passage comes in from the east and turns at the west end into a very narrow gap. A strong draft blows from the west and coal dust swirls.",
+    "dark": true
+  },
+  "drafty room": {
+    "prompt": "A small drafty mine room at the bottom of a long shaft, with a heavy iron chain visible hanging in the shaft above. A passageway leads south and a very narrow gap leads east. Cold air moves through it and the walls are black with coal dust.",
+    "dark": true
+  },
+  "machine room": {
+    "prompt": "A large, cold stone room whose only exit is to the north. In one corner stands a machine that looks like a big clothes dryer, with a large lid on its front and a small switch on its face. Pipes and dust surround it in dim light.",
+    "dark": true
+  },
+  "coal mine": {
+    "prompt": "A nondescript part of an old coal mine, with rough black walls, rotting timber props, and a floor strewn with coal dust and chunks of coal. Tunnels lead off in several directions into darkness, and the light is dim and gritty.",
+    "dark": true
+  },
+  "slide room": {
+    "prompt": "A small chamber that was part of a coal mine, with a steep metal slide twisting downward into darkness. A long passage leads east and a small opening leads north. Rough dark stone walls, coal dust and cold dim light.",
+    "dark": true
+  }
+}

@@ -1,3 +1,4 @@
+import { cleanPlayerPrompt } from './player';
 import { STYLES } from './styles';
 import type { GameId } from './types';
 
@@ -12,6 +13,8 @@ export type Settings = {
   imageModel: string;
   videoModel: string;
   styleByGame: Partial<Record<GameId, string>>;
+  /** The player's own "About you and how it should look" text; cleaned, at most 500 characters. */
+  playerPrompt: string;
   consented: boolean;
   maxImages: number;
   maxVideos: number;
@@ -23,6 +26,7 @@ export function defaultSettings(): Settings {
     imageModel: 'black-forest-labs/flux-3-image-klein',
     videoModel: 'x-ai/grok-imagine-video-1.5-lite',
     styleByGame: {},
+    playerPrompt: '',
     consented: false,
     maxImages: 40,
     maxVideos: 5,
@@ -50,6 +54,7 @@ export function parseSettings(raw: unknown): Settings {
     imageModel: isStr(r.imageModel) ? r.imageModel : d.imageModel,
     videoModel: isStr(r.videoModel) ? r.videoModel : d.videoModel,
     styleByGame,
+    playerPrompt: cleanPlayerPrompt(r.playerPrompt),
     consented: r.consented === true,
     maxImages: isCap(r.maxImages) ? r.maxImages : d.maxImages,
     maxVideos: isCap(r.maxVideos) ? r.maxVideos : d.maxVideos,

@@ -115,3 +115,65 @@ describe('openrouter video', () => {
     expect(fetch.mock.calls.length).toBeLessThan(200);
   });
 });
+
+describe('openrouter image with a reference picture', () => {
+  const ref = () => new Blob(['earlierpng'], { type: 'image/png' });
+  const ok = () => json({ data: [{ b64_json: PNG_B64, media_type: 'image/png' }] });
+  const bodyOf = (fetch: ReturnType<typeof vi.fn>, n: number) => JSON.parse(String((fetch.mock.calls[n][1] as RequestInit).body));
+
+  it('sends_the_reference_as_a_data_url_in_input_references', async () => {
+    const { client, fetch } = make(async () => ok());
+    const r = await client.image('m/img', 'a cave', undefined, ref());
+    expect(r.ok).toBe(true);
+    expect(bodyOf(fetch, 0)).toEqual({
+      model: 'm/img',
+      prompt: 'a cave',
+      input_references: [{ type: 'image_url', image_url: { url: `data:image/png;base64,${btoa('earlierpng')}` } }],
+    });
+  });
+
+  it('sends_no_input_references_field_without_a_reference', async () => {
+    const { client, fetch } = make(async () => ok());
+    await client.image('m/img', 'a cave');
+    expect(bodyOf(fetch, 0)).toEqual({ model: 'm/img', prompt: 'a cave' });
+  });
+
+  it('retries_once_without_the_reference_when_the_model_refuses_it_and_remembers_that_model', async () => {
+    const { client, fetch } = make(async (_u, init) =>
+      JSON.parse(String(init?.body)).input_references ? json({ error: 'no refs' }, 400) : ok(),
+    );
+    const first = await client.image('m/noref', 'a cave', undefined, ref());
+    expect(first.ok).toBe(true);
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(bodyOf(fetch, 0).input_references).toBeDefined();
+    expect(bodyOf(fetch, 1)).toEqual({ model: 'm/noref', prompt: 'a cave' });
+    // Next time the same model is not sent a reference at all; another model still is.
+    await client.image('m/noref', 'again', undefined, ref());
+    expect(fetch).toHaveBeenCalledTimes(3);
+    expect(bodyOf(fetch, 2).input_references).toBeUndefined();
+    await client.image('m/other', 'again', undefined, ref());
+    expect(bodyOf(fetch, 3).input_references).toBeDefined();
+  });
+
+  it('does_not_retry_on_other_failures', async () => {
+    for (const [status, reason] of [[401, 'auth'], [402, 'credit'], [429, 'rate'], [500, 'bad-response']] as const) {
+      const { client, fetch } = make(async () => json({}, status));
+      expect(await client.image('m', 'p', undefined, ref())).toEqual({ ok: false, reason });
+      expect(fetch).toHaveBeenCalledTimes(1);
+    }
+  });
+
+  it('gives_up_after_one_retry_if_it_is_still_refused', async () => {
+    const { client, fetch } = make(async () => json({}, 400));
+    expect(await client.image('m', 'p', undefined, ref())).toEqual({ ok: false, reason: 'refused' });
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
+  it('keeps_the_key_out_of_the_body_and_url', async () => {
+    const { client, fetch } = make(async () => ok());
+    await client.image('m', 'p', undefined, ref());
+    const [url, init] = fetch.mock.calls[0] as [string, RequestInit];
+    expect(url).not.toContain('sk-or-secret');
+    expect(String(init.body)).not.toContain('sk-or-secret');
+  });
+});

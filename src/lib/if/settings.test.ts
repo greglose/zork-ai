@@ -42,3 +42,16 @@ describe('settings', () => {
     expect(g.canVideo()).toBe(true);
   });
 });
+
+describe('playerPrompt setting', () => {
+  it('defaults_to_empty', () => {
+    expect(defaultSettings().playerPrompt).toBe('');
+  });
+  it('is_kept_cleaned_and_capped_on_parse', () => {
+    expect(parseSettings({ playerPrompt: '  I am a\nhiker \u00e9\u0000 ' }).playerPrompt).toBe('I am a hiker \u00e9');
+    expect(parseSettings({ playerPrompt: 'x'.repeat(2000) }).playerPrompt).toHaveLength(500);
+  });
+  it('is_replaced_with_empty_when_not_a_string', () => {
+    for (const bad of [5, null, {}, ['a'], true]) expect(parseSettings({ playerPrompt: bad }).playerPrompt).toBe('');
+  });
+});

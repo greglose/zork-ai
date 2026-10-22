@@ -1,0 +1,669 @@
+{
+  "source": {
+    "repo": "https://github.com/historicalsource/zork1",
+    "commit": "97b7b3d68c075dd9af7da499c3e9690ada3471fd",
+    "file": "1dungeon.zil"
+  },
+  "rooms": [
+    {
+      "zil": "WEST-OF-HOUSE",
+      "desc": "West of House",
+      "id": "west of house",
+      "lit": true
+    },
+    {
+      "zil": "STONE-BARROW",
+      "desc": "Stone Barrow",
+      "id": "stone barrow",
+      "lit": true
+    },
+    {
+      "zil": "NORTH-OF-HOUSE",
+      "desc": "North of House",
+      "id": "north of house",
+      "lit": true
+    },
+    {
+      "zil": "SOUTH-OF-HOUSE",
+      "desc": "South of House",
+      "id": "south of house",
+      "lit": true
+    },
+    {
+      "zil": "EAST-OF-HOUSE",
+      "desc": "Behind House",
+      "id": "behind house",
+      "lit": true
+    },
+    {
+      "zil": "FOREST-1",
+      "desc": "Forest",
+      "id": "forest",
+      "lit": true
+    },
+    {
+      "zil": "FOREST-2",
+      "desc": "Forest",
+      "id": "forest",
+      "lit": true
+    },
+    {
+      "zil": "MOUNTAINS",
+      "desc": "Forest",
+      "id": "forest",
+      "lit": true
+    },
+    {
+      "zil": "FOREST-3",
+      "desc": "Forest",
+      "id": "forest",
+      "lit": true
+    },
+    {
+      "zil": "PATH",
+      "desc": "Forest Path",
+      "id": "forest path",
+      "lit": true
+    },
+    {
+      "zil": "UP-A-TREE",
+      "desc": "Up a Tree",
+      "id": "up a tree",
+      "lit": true
+    },
+    {
+      "zil": "GRATING-CLEARING",
+      "desc": "Clearing",
+      "id": "clearing",
+      "lit": true
+    },
+    {
+      "zil": "CLEARING",
+      "desc": "Clearing",
+      "id": "clearing",
+      "lit": true
+    },
+    {
+      "zil": "KITCHEN",
+      "desc": "Kitchen",
+      "id": "kitchen",
+      "lit": true
+    },
+    {
+      "zil": "ATTIC",
+      "desc": "Attic",
+      "id": "attic",
+      "lit": false
+    },
+    {
+      "zil": "LIVING-ROOM",
+      "desc": "Living Room",
+      "id": "living room",
+      "lit": true
+    },
+    {
+      "zil": "CELLAR",
+      "desc": "Cellar",
+      "id": "cellar",
+      "lit": false
+    },
+    {
+      "zil": "TROLL-ROOM",
+      "desc": "The Troll Room",
+      "id": "the troll room",
+      "lit": false
+    },
+    {
+      "zil": "EAST-OF-CHASM",
+      "desc": "East of Chasm",
+      "id": "east of chasm",
+      "lit": false
+    },
+    {
+      "zil": "GALLERY",
+      "desc": "Gallery",
+      "id": "gallery",
+      "lit": true
+    },
+    {
+      "zil": "STUDIO",
+      "desc": "Studio",
+      "id": "studio",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-1",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-2",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-3",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-4",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "DEAD-END-1",
+      "desc": "Dead End",
+      "id": "dead end",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-5",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "DEAD-END-2",
+      "desc": "Dead End",
+      "id": "dead end",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-6",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-7",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-8",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "DEAD-END-3",
+      "desc": "Dead End",
+      "id": "dead end",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-9",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-10",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-11",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "GRATING-ROOM",
+      "desc": "Grating Room",
+      "id": "grating room",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-12",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "DEAD-END-4",
+      "desc": "Dead End",
+      "id": "dead end",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-13",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-14",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "MAZE-15",
+      "desc": "Maze",
+      "id": "maze",
+      "lit": false
+    },
+    {
+      "zil": "CYCLOPS-ROOM",
+      "desc": "Cyclops Room",
+      "id": "cyclops room",
+      "lit": false
+    },
+    {
+      "zil": "STRANGE-PASSAGE",
+      "desc": "Strange Passage",
+      "id": "strange passage",
+      "lit": false
+    },
+    {
+      "zil": "TREASURE-ROOM",
+      "desc": "Treasure Room",
+      "id": "treasure room",
+      "lit": false
+    },
+    {
+      "zil": "RESERVOIR-SOUTH",
+      "desc": "Reservoir South",
+      "id": "reservoir south",
+      "lit": false
+    },
+    {
+      "zil": "RESERVOIR",
+      "desc": "Reservoir",
+      "id": "reservoir",
+      "lit": false
+    },
+    {
+      "zil": "RESERVOIR-NORTH",
+      "desc": "Reservoir North",
+      "id": "reservoir north",
+      "lit": false
+    },
+    {
+      "zil": "STREAM-VIEW",
+      "desc": "Stream View",
+      "id": "stream view",
+      "lit": false
+    },
+    {
+      "zil": "IN-STREAM",
+      "desc": "Stream",
+      "id": "stream",
+      "lit": false
+    },
+    {
+      "zil": "MIRROR-ROOM-1",
+      "desc": "Mirror Room",
+      "id": "mirror room",
+      "lit": false
+    },
+    {
+      "zil": "MIRROR-ROOM-2",
+      "desc": "Mirror Room",
+      "id": "mirror room",
+      "lit": true
+    },
+    {
+      "zil": "SMALL-CAVE",
+      "desc": "Cave",
+      "id": "cave",
+      "lit": false
+    },
+    {
+      "zil": "TINY-CAVE",
+      "desc": "Cave",
+      "id": "cave",
+      "lit": false
+    },
+    {
+      "zil": "COLD-PASSAGE",
+      "desc": "Cold Passage",
+      "id": "cold passage",
+      "lit": false
+    },
+    {
+      "zil": "NARROW-PASSAGE",
+      "desc": "Narrow Passage",
+      "id": "narrow passage",
+      "lit": false
+    },
+    {
+      "zil": "WINDING-PASSAGE",
+      "desc": "Winding Passage",
+      "id": "winding passage",
+      "lit": false
+    },
+    {
+      "zil": "TWISTING-PASSAGE",
+      "desc": "Twisting Passage",
+      "id": "twisting passage",
+      "lit": false
+    },
+    {
+      "zil": "ATLANTIS-ROOM",
+      "desc": "Atlantis Room",
+      "id": "atlantis room",
+      "lit": false
+    },
+    {
+      "zil": "EW-PASSAGE",
+      "desc": "East-West Passage",
+      "id": "east-west passage",
+      "lit": false
+    },
+    {
+      "zil": "ROUND-ROOM",
+      "desc": "Round Room",
+      "id": "round room",
+      "lit": false
+    },
+    {
+      "zil": "DEEP-CANYON",
+      "desc": "Deep Canyon",
+      "id": "deep canyon",
+      "lit": false
+    },
+    {
+      "zil": "DAMP-CAVE",
+      "desc": "Damp Cave",
+      "id": "damp cave",
+      "lit": false
+    },
+    {
+      "zil": "LOUD-ROOM",
+      "desc": "Loud Room",
+      "id": "loud room",
+      "lit": false
+    },
+    {
+      "zil": "NS-PASSAGE",
+      "desc": "North-South Passage",
+      "id": "north-south passage",
+      "lit": false
+    },
+    {
+      "zil": "CHASM-ROOM",
+      "desc": "Chasm",
+      "id": "chasm",
+      "lit": false
+    },
+    {
+      "zil": "ENTRANCE-TO-HADES",
+      "desc": "Entrance to Hades",
+      "id": "entrance to hades",
+      "lit": true
+    },
+    {
+      "zil": "LAND-OF-LIVING-DEAD",
+      "desc": "Land of the Dead",
+      "id": "land of the dead",
+      "lit": true
+    },
+    {
+      "zil": "ENGRAVINGS-CAVE",
+      "desc": "Engravings Cave",
+      "id": "engravings cave",
+      "lit": false
+    },
+    {
+      "zil": "EGYPT-ROOM",
+      "desc": "Egyptian Room",
+      "id": "egyptian room",
+      "lit": false
+    },
+    {
+      "zil": "DOME-ROOM",
+      "desc": "Dome Room",
+      "id": "dome room",
+      "lit": false
+    },
+    {
+      "zil": "TORCH-ROOM",
+      "desc": "Torch Room",
+      "id": "torch room",
+      "lit": false
+    },
+    {
+      "zil": "NORTH-TEMPLE",
+      "desc": "Temple",
+      "id": "temple",
+      "lit": true
+    },
+    {
+      "zil": "SOUTH-TEMPLE",
+      "desc": "Altar",
+      "id": "altar",
+      "lit": true
+    },
+    {
+      "zil": "DAM-ROOM",
+      "desc": "Dam",
+      "id": "dam",
+      "lit": true
+    },
+    {
+      "zil": "DAM-LOBBY",
+      "desc": "Dam Lobby",
+      "id": "dam lobby",
+      "lit": true
+    },
+    {
+      "zil": "MAINTENANCE-ROOM",
+      "desc": "Maintenance Room",
+      "id": "maintenance room",
+      "lit": false
+    },
+    {
+      "zil": "DAM-BASE",
+      "desc": "Dam Base",
+      "id": "dam base",
+      "lit": true
+    },
+    {
+      "zil": "RIVER-1",
+      "desc": "Frigid River",
+      "id": "frigid river",
+      "lit": true
+    },
+    {
+      "zil": "RIVER-2",
+      "desc": "Frigid River",
+      "id": "frigid river",
+      "lit": false
+    },
+    {
+      "zil": "RIVER-3",
+      "desc": "Frigid River",
+      "id": "frigid river",
+      "lit": false
+    },
+    {
+      "zil": "WHITE-CLIFFS-NORTH",
+      "desc": "White Cliffs Beach",
+      "id": "white cliffs beach",
+      "lit": false
+    },
+    {
+      "zil": "WHITE-CLIFFS-SOUTH",
+      "desc": "White Cliffs Beach",
+      "id": "white cliffs beach",
+      "lit": false
+    },
+    {
+      "zil": "RIVER-4",
+      "desc": "Frigid River",
+      "id": "frigid river",
+      "lit": false
+    },
+    {
+      "zil": "RIVER-5",
+      "desc": "Frigid River",
+      "id": "frigid river",
+      "lit": true
+    },
+    {
+      "zil": "SHORE",
+      "desc": "Shore",
+      "id": "shore",
+      "lit": true
+    },
+    {
+      "zil": "SANDY-BEACH",
+      "desc": "Sandy Beach",
+      "id": "sandy beach",
+      "lit": false
+    },
+    {
+      "zil": "SANDY-CAVE",
+      "desc": "Sandy Cave",
+      "id": "sandy cave",
+      "lit": false
+    },
+    {
+      "zil": "ARAGAIN-FALLS",
+      "desc": "Aragain Falls",
+      "id": "aragain falls",
+      "lit": true
+    },
+    {
+      "zil": "ON-RAINBOW",
+      "desc": "On the Rainbow",
+      "id": "on the rainbow",
+      "lit": true
+    },
+    {
+      "zil": "END-OF-RAINBOW",
+      "desc": "End of Rainbow",
+      "id": "end of rainbow",
+      "lit": true
+    },
+    {
+      "zil": "CANYON-BOTTOM",
+      "desc": "Canyon Bottom",
+      "id": "canyon bottom",
+      "lit": true
+    },
+    {
+      "zil": "CLIFF-MIDDLE",
+      "desc": "Rocky Ledge",
+      "id": "rocky ledge",
+      "lit": true
+    },
+    {
+      "zil": "CANYON-VIEW",
+      "desc": "Canyon View",
+      "id": "canyon view",
+      "lit": true
+    },
+    {
+      "zil": "MINE-ENTRANCE",
+      "desc": "Mine Entrance",
+      "id": "mine entrance",
+      "lit": false
+    },
+    {
+      "zil": "SQUEEKY-ROOM",
+      "desc": "Squeaky Room",
+      "id": "squeaky room",
+      "lit": false
+    },
+    {
+      "zil": "BAT-ROOM",
+      "desc": "Bat Room",
+      "id": "bat room",
+      "lit": false
+    },
+    {
+      "zil": "SHAFT-ROOM",
+      "desc": "Shaft Room",
+      "id": "shaft room",
+      "lit": false
+    },
+    {
+      "zil": "SMELLY-ROOM",
+      "desc": "Smelly Room",
+      "id": "smelly room",
+      "lit": false
+    },
+    {
+      "zil": "GAS-ROOM",
+      "desc": "Gas Room",
+      "id": "gas room",
+      "lit": false
+    },
+    {
+      "zil": "LADDER-TOP",
+      "desc": "Ladder Top",
+      "id": "ladder top",
+      "lit": false
+    },
+    {
+      "zil": "LADDER-BOTTOM",
+      "desc": "Ladder Bottom",
+      "id": "ladder bottom",
+      "lit": false
+    },
+    {
+      "zil": "DEAD-END-5",
+      "desc": "Dead End",
+      "id": "dead end",
+      "lit": false
+    },
+    {
+      "zil": "TIMBER-ROOM",
+      "desc": "Timber Room",
+      "id": "timber room",
+      "lit": false
+    },
+    {
+      "zil": "LOWER-SHAFT",
+      "desc": "Drafty Room",
+      "id": "drafty room",
+      "lit": false
+    },
+    {
+      "zil": "MACHINE-ROOM",
+      "desc": "Machine Room",
+      "id": "machine room",
+      "lit": false
+    },
+    {
+      "zil": "MINE-1",
+      "desc": "Coal Mine",
+      "id": "coal mine",
+      "lit": false
+    },
+    {
+      "zil": "MINE-2",
+      "desc": "Coal Mine",
+      "id": "coal mine",
+      "lit": false
+    },
+    {
+      "zil": "MINE-3",
+      "desc": "Coal Mine",
+      "id": "coal mine",
+      "lit": false
+    },
+    {
+      "zil": "MINE-4",
+      "desc": "Coal Mine",
+      "id": "coal mine",
+      "lit": false
+    },
+    {
+      "zil": "SLIDE-ROOM",
+      "desc": "Slide Room",
+      "id": "slide room",
+      "lit": false
+    }
+  ]
+}
