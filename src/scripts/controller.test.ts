@@ -233,6 +233,7 @@ describe('createController', () => {
 
   it('no_player_command_text_in_any_prompt', async () => {
     const r = rig({
+      settings: { playerPrompt: 'I am a woman adventurer dressed for a day of hiking.' },
       turns: [
         turn('West of House', 0, 'start'),
         turn('Living Room', 3, 'xyzzy-secret-word\nYou are in the living room.\n\n>'),
@@ -244,7 +245,58 @@ describe('createController', () => {
     await r.controller.idle();
     await r.controller.requestVideo();
     expect(r.openrouter.image.mock.calls.length + r.openrouter.video.mock.calls.length).toBeGreaterThanOrEqual(3);
-    for (const p of r.prompts) expect(p).not.toContain('secret');
+    // The player's own description is sent with every request; the typed command never is.
+    for (const p of r.prompts) {
+      expect(p).toContain('woman adventurer dressed for a day of hiking');
+      expect(p).not.toContain('secret');
+    }
+  });
+
+  it('player_description_is_in_image_and_video_prompts_and_empty_changes_nothing', async () => {
+    const withMe = rig({ settings: { playerPrompt: 'I am a hiker' }, turns: [turn('Living Room', 0, 'a'), turn('Living Room', 5, 'Taken.')] });
+    await withMe.controller.start();
+    await withMe.controller.command('take lamp');
+    await withMe.controller.idle();
+    expect(withMe.prompts.length).toBe(2);
+    for (const p of withMe.prompts) expect(p).toContain('--- Player description ---\nI am a hiker\n');
+    const without = rig({ turns: [turn('Living Room', 0, 'a')] });
+    await without.controller.start();
+    await without.controller.idle();
+    expect(without.prompts[0]).not.toContain('Player description');
+  });
+
+  it('changed_description_uses_a_new_cache_namespace_and_keeps_the_old_picture', async () => {
+    const r = rig({ turns: [turn('West of House', 0, 'a')] });
+    await r.controller.start();
+    await r.controller.idle();
+    expect([...r.stored.keys()]).toEqual(['zork|cartoon|image|west of house']);
+    r.settings.playerPrompt = 'I am a hiker';
+    r.controller.retryImage();
+    await r.controller.idle();
+    expect(r.openrouter.image).toHaveBeenCalledTimes(2);
+    const keys = [...r.stored.keys()].sort();
+    expect(keys).toHaveLength(2);
+    expect(keys[0]).toBe('zork|cartoon.' + keys[0].split('.')[1]);
+    expect(keys[1]).toBe('zork|cartoon|image|west of house');
+    // Back to no description: the first picture is found again for free.
+    r.settings.playerPrompt = '';
+    r.controller.retryImage();
+    await r.controller.idle();
+    expect(r.openrouter.image).toHaveBeenCalledTimes(2);
+    expect(r.ui.showImage).toHaveBeenCalledTimes(3);
+  });
+
+  it('a_picture_finishing_after_the_description_changed_is_stored_but_not_shown', async () => {
+    const r = rig({ turns: [turn('West of House', 0, 'a')] });
+    const d = deferred<MediaResult<Blob>>();
+    r.openrouter.image.mockReturnValueOnce(d.promise);
+    await r.controller.start();
+    await vi.waitFor(() => expect(r.openrouter.image).toHaveBeenCalled());
+    r.settings.playerPrompt = 'I am a hiker';
+    d.resolve({ ok: true, value: blob('late') });
+    await r.controller.idle();
+    expect(r.stored.has('zork|cartoon|image|west of house')).toBe(true);
+    expect(r.ui.showImage).not.toHaveBeenCalled();
   });
 
   it('empty_command_requests_nothing', async () => {

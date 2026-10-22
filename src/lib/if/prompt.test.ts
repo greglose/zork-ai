@@ -46,3 +46,50 @@ describe('prompt builder', () => {
     });
   });
 });
+
+describe('player description in prompts', () => {
+  const me = 'I am a woman adventurer dressed for a day of hiking. I wish to explore a colorful cartoon version of this game.';
+  const video = { game: 'zork' as const, styleId: 'cartoon', roomName: 'West of House', event: { kind: 'death' as const, text: 't' } };
+
+  it('is_byte_identical_when_missing_empty_or_blank', () => {
+    const plain = buildImagePrompt(base);
+    expect(buildImagePrompt({ ...base, playerPrompt: '' })).toBe(plain);
+    expect(buildImagePrompt({ ...base, playerPrompt: '  \n ' })).toBe(plain);
+    const plainVideo = buildVideoPrompt(video);
+    expect(buildVideoPrompt({ ...video, playerPrompt: '' })).toBe(plainVideo);
+    expect(buildVideoPrompt({ ...video, playerPrompt: '   ' })).toBe(plainVideo);
+  });
+  it('adds_a_delimited_block_after_style_and_bible_and_before_the_place', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: me });
+    const style = STYLES.find((x) => x.id === 'cartoon')!.prefix;
+    const at = (s: string) => p.indexOf(s);
+    expect(at(style)).toBe(0);
+    expect(at(BIBLES.zork)).toBeGreaterThan(at(style));
+    expect(at(me)).toBeGreaterThan(at(BIBLES.zork));
+    expect(at('Place: West of House.')).toBeGreaterThan(at(me));
+    expect(p).toMatch(/-{3} Player description -{3}\n[^\n]*hiking[^\n]*\n-{3} End of player description -{3}/);
+  });
+  it('tells_the_model_how_to_use_it', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: me });
+    expect(p).toMatch(/follow the description[^\n]*appearance/i);
+    expect(p).toMatch(/different art look[^\n]*priority/i);
+    expect(p).toMatch(/from behind or at the edge of the frame/i);
+    expect(p).toMatch(/no text or captions/i);
+  });
+  it('is_in_video_prompts_too', () => {
+    const v = buildVideoPrompt({ ...video, playerPrompt: me });
+    expect(v).toContain(me);
+    expect(v.indexOf(me)).toBeLessThan(v.indexOf('Moment:'));
+    expect(v).toMatch(/no text or captions/i);
+  });
+  it('keeps_non_ascii_player_text_but_the_rest_stays_ascii', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: 'Soy \u00e1gil' });
+    expect(p).toContain('Soy \u00e1gil');
+    expect(p.replace('Soy \u00e1gil', '')).toMatch(/^[\x20-\x7e\n]*$/);
+  });
+  it('is_cleaned_and_capped_even_when_given_raw', () => {
+    const p = buildImagePrompt({ ...base, playerPrompt: 'x'.repeat(900) + '\u0000' });
+    expect(p).toContain('x'.repeat(500));
+    expect(p).not.toContain('x'.repeat(501));
+  });
+});

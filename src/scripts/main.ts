@@ -1,5 +1,6 @@
 // Page script for the illustrated adventures. One engine per page load (the Glk layer is module-level state).
 import { createEngine } from '../lib/if/engine';
+import { PLAYER_PROMPT_MAX, cleanPlayerPrompt } from '../lib/if/player';
 import { createDetector } from '../lib/if/events';
 import { loadGameSave, loadSettings, writeGameSave, writeSettings } from '../lib/if/save';
 import { createSpendGuard } from '../lib/if/settings';
@@ -31,16 +32,45 @@ async function init(): Promise<void> {
   const videoModel = q<HTMLInputElement>('[data-video-model]');
   const consent = q<HTMLInputElement>('[data-consent]');
   const styleSelect = q<HTMLSelectElement>('[data-style]');
+  const playerField = q<HTMLTextAreaElement>('[data-player-prompt]');
+  const playerCount = q('[data-player-count]');
+  const playerCountLive = q('[data-player-count-live]');
   const caps = q('[data-caps]');
   const status = q('[data-settings-status]');
   keyField.value = settings.key ?? '';
   imageModel.value = settings.imageModel;
   videoModel.value = settings.videoModel;
+  playerField.value = settings.playerPrompt;
   consent.checked = settings.consented;
   styleSelect.value = settings.styleByGame[GAME] ?? styleSelect.value;
   caps.textContent = `This session: up to ${settings.maxImages} pictures and ${settings.maxVideos} videos. Reloading the page starts a new session.`;
   const persistSettings = () => writeSettings(storage, settings);
   const slug = (field: HTMLInputElement, fallback: string) => field.value.trim().slice(0, 200) || fallback;
+
+  const countText = () => `${playerField.value.length} of ${PLAYER_PROMPT_MAX} characters`;
+  playerCount.textContent = countText();
+  // Keep what the player typed in settings, cleaned. Also run before a picture or video is asked for, so text typed
+  // a moment ago is never missed.
+  const commitPlayerPrompt = () => {
+    const cleaned = cleanPlayerPrompt(playerField.value);
+    if (cleaned !== settings.playerPrompt) {
+      settings.playerPrompt = cleaned;
+      persistSettings();
+    }
+    if (playerField.value !== cleaned) playerField.value = cleaned;
+  };
+  // The visible count follows every keystroke but is hidden from screen readers; the polite live region is only
+  // updated when the player is done with the field, so it is not announced per keystroke.
+  playerField.addEventListener('input', () => {
+    playerCount.textContent = countText();
+  });
+  for (const type of ['change', 'blur'] as const) {
+    playerField.addEventListener(type, () => {
+      commitPlayerPrompt();
+      playerCount.textContent = countText();
+      playerCountLive.textContent = countText();
+    });
+  }
 
   keyField.addEventListener('input', () => {
     settings.key = keyField.value.trim().slice(0, 200) || null;
@@ -126,8 +156,14 @@ async function init(): Promise<void> {
     persistSettings();
     persistGame();
   });
-  q('[data-act="video"]').addEventListener('click', () => void controller.requestVideo());
-  q('[data-act="retry"]').addEventListener('click', () => controller.retryImage());
+  q('[data-act="video"]').addEventListener('click', () => {
+    commitPlayerPrompt();
+    void controller.requestVideo();
+  });
+  q('[data-act="retry"]').addEventListener('click', () => {
+    commitPlayerPrompt();
+    controller.retryImage();
+  });
 
   await controller.start(save.bytes ?? undefined);
   persistGame();

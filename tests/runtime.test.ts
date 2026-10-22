@@ -67,8 +67,8 @@ beforeAll(async () => {
   page = await vi.waitFor(() => read('index.html'), { timeout: 60_000, interval: 250 });
 }, 65_000);
 
-async function boot(opts: { key?: string | null; consented?: boolean } = {}): Promise<void> {
-  const settings = { ...defaultSettings(), key: opts.key === undefined ? 'sk-or-test-key' : opts.key, consented: opts.consented ?? true };
+async function boot(opts: { key?: string | null; consented?: boolean; playerPrompt?: string } = {}): Promise<void> {
+  const settings = { ...defaultSettings(), key: opts.key === undefined ? 'sk-or-test-key' : opts.key, consented: opts.consented ?? true, playerPrompt: opts.playerPrompt ?? '' };
   writeSettings(localStorage, settings);
   document.body.innerHTML = /<body[^>]*>([\s\S]*)<\/body>/.exec(page)![1].replace(/<script[\s\S]*?<\/script>/g, '');
   vi.resetModules();
@@ -157,5 +157,87 @@ describe('Zork page', () => {
     await boot();
     await type('north');
     expect(JSON.parse(localStorage.getItem(GAME_SAVE_KEY)!).version).toBe(1);
+  });
+
+  describe('player description', () => {
+    const field = () => q<HTMLTextAreaElement>('[data-player-prompt]');
+    const edit = (value: string, event: 'input' | 'change' | 'blur' = 'change') => {
+      field().value = value;
+      field().dispatchEvent(new Event(event, { bubbles: true }));
+    };
+    const stored = () => JSON.parse(localStorage.getItem(SETTINGS_KEY)!);
+
+    it('has a labelled textarea limited to 500 characters, with an example and helper text', async () => {
+      await boot();
+      const f = field();
+      expect(f.tagName).toBe('TEXTAREA');
+      expect(f.getAttribute('maxlength')).toBe('500');
+      expect(root().querySelector(`label[for="${f.id}"]`)?.textContent).toMatch(/About you and how it should look/);
+      expect(f.getAttribute('placeholder')).toMatch(/woman adventurer/);
+      const hint = document.getElementById(f.getAttribute('aria-describedby')!.split(' ')[0])!;
+      expect(hint.textContent).toMatch(/sent to OpenRouter and the model provider with each picture request/);
+    });
+
+    it('persists on change and on blur, cleaned, without touching the game save', async () => {
+      await boot();
+      edit('  I am a hiker\n in boots ');
+      expect(stored().playerPrompt).toBe('I am a hiker in boots');
+      expect(field().value).toBe('I am a hiker in boots');
+      edit('Plus a hat', 'blur');
+      expect(stored().playerPrompt).toBe('Plus a hat');
+      expect(localStorage.getItem(GAME_SAVE_KEY) ?? '').not.toContain('hat');
+    });
+
+    it('shows a saved description on load and sends it with the first picture', async () => {
+      await boot({ playerPrompt: 'I am a hiker' });
+      expect(field().value).toBe('I am a hiker');
+      expect(fake.images[0]).toContain('--- Player description ---\nI am a hiker\n');
+    });
+
+    it('keeps the live character count out of the live region until the field is committed', async () => {
+      await boot();
+      const visible = q('[data-player-count]');
+      const live = q('[data-player-count-live]');
+      expect(live.getAttribute('role')).toBe('status');
+      expect(live.getAttribute('aria-live')).toBe('polite');
+      expect(visible.closest('[aria-live]')).toBeNull();
+      expect(visible.textContent).toMatch(/0 of 500/);
+      field().value = 'twelve chars';
+      field().dispatchEvent(new Event('input', { bubbles: true }));
+      expect(visible.textContent).toMatch(/12 of 500/);
+      expect(live.textContent).toBe('');
+      field().dispatchEvent(new Event('change', { bubbles: true }));
+      expect(live.textContent).toMatch(/12 of 500/);
+    });
+
+    it('draws the current place again with the description when Redraw picture is pressed', async () => {
+      await boot();
+      await type('open mailbox');
+      expect(fake.images.length).toBe(1);
+      edit('I am a woman adventurer dressed for a day of hiking.');
+      q('[data-act="retry"]').click();
+      await vi.waitFor(() => expect(fake.images.length).toBe(2));
+      expect(fake.images[1]).toContain('woman adventurer dressed for a day of hiking');
+      expect(fake.images[1]).toContain('Place: West of House.');
+      expect(fake.images[0]).not.toContain('Player description');
+      // Pressing Redraw straight after typing (no blur yet) still uses the typed text.
+      field().value = 'I carry a red lantern';
+      q('[data-act="retry"]').click();
+      await vi.waitFor(() => expect(fake.images.length).toBe(3));
+      expect(fake.images[2]).toContain('I carry a red lantern');
+    });
+
+    it('sends the description but never a typed command, in pictures or videos', async () => {
+      await boot();
+      edit('I am a hiker');
+      await type('open mailbox');
+      await type('north');
+      q('[data-act="video"]').click();
+      await vi.waitFor(() => expect(fake.videos.length).toBe(1));
+      for (const p of [...fake.images.slice(1), ...fake.videos]) {
+        expect(p).toContain('I am a hiker');
+        expect(p.toLowerCase()).not.toMatch(/open mailbox|> ?north/);
+      }
+    });
   });
 });

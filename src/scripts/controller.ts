@@ -3,6 +3,7 @@
 // image request runs at a time and a newer room replaces a queued older one. Player-typed commands are never
 // put in a prompt: prompts use the room name and the game's own room text only, with the echoed command removed.
 import type { Engine } from '../lib/if/engine';
+import { cleanPlayerPrompt, mediaNamespace } from '../lib/if/player';
 import { buildImagePrompt, buildVideoPrompt } from '../lib/if/prompt';
 import type { Settings } from '../lib/if/settings';
 import { STYLES } from '../lib/if/styles';
@@ -72,7 +73,10 @@ export function createController(d: ControllerDeps) {
   const inflight = new Set<Promise<void>>();
 
   const currentStyle = () => settings.styleByGame[game] ?? STYLES[0].id;
-  const isCurrent = (id: string, styleId: string) => room?.id === id && currentStyle() === styleId;
+  const playerPrompt = () => cleanPlayerPrompt(settings.playerPrompt);
+  /** The cache namespace in force now: the style plus a hash of the player's description. */
+  const currentNamespace = () => mediaNamespace(currentStyle(), playerPrompt());
+  const isCurrent = (id: string, namespace: string) => room?.id === id && currentNamespace() === namespace;
 
   function track(p: Promise<void>): void {
     inflight.add(p);
@@ -107,10 +111,10 @@ export function createController(d: ControllerDeps) {
   /** The one paid-media pipeline: cache, spend gate, cap count, key capture, stale-key drop, failure notice, store. */
   async function runPaid(job: PaidJob): Promise<void> {
     const { key, roomId, show } = job;
-    const styleId = key.styleId;
+    const namespace = key.styleId;
     const cached = await store.get(key);
     if (cached) {
-      if (isCurrent(roomId, styleId)) show(cached);
+      if (isCurrent(roomId, namespace)) show(cached);
       return;
     }
     const why = blocked(job.kind);
@@ -126,11 +130,11 @@ export function createController(d: ControllerDeps) {
       // Key forgotten or replaced while the request ran: drop the result unseen.
       if (!settings.key || settings.key !== apiKey) return;
       if (!res.ok) {
-        if (isCurrent(roomId, styleId)) ui.showNotice(FAILURE[res.reason]);
+        if (isCurrent(roomId, namespace)) ui.showNotice(FAILURE[res.reason]);
         return;
       }
       await store.put(key, res.value);
-      if (isCurrent(roomId, styleId)) show(res.value);
+      if (isCurrent(roomId, namespace)) show(res.value);
     } finally {
       end();
     }
@@ -138,14 +142,16 @@ export function createController(d: ControllerDeps) {
 
   function runImage(job: Room): Promise<void> {
     const styleId = currentStyle();
+    const player = playerPrompt();
+    const namespace = mediaNamespace(styleId, player);
     return runPaid({
       kind: 'image',
-      key: { game, styleId, kind: 'image', id: job.id },
+      key: { game, styleId: namespace, kind: 'image', id: job.id },
       roomId: job.id,
-      explainBlocked: isCurrent(job.id, styleId),
+      explainBlocked: isCurrent(job.id, namespace),
       note: () => guard.noteImage(),
       call: () =>
-        openrouter.image(settings.imageModel, buildImagePrompt({ game, styleId, roomName: job.name, text: job.text })),
+        openrouter.image(settings.imageModel, buildImagePrompt({ game, styleId, roomName: job.name, text: job.text, playerPrompt: player })),
       show: (b) => ui.showImage(b),
     });
   }
@@ -176,17 +182,18 @@ export function createController(d: ControllerDeps) {
 
   async function runVideo(kind: GameEvent['kind'], r: Room, text: string, id: string, manual: boolean): Promise<void> {
     const styleId = currentStyle();
+    const player = playerPrompt();
     try {
       await runPaid({
         kind: 'video',
-        key: { game, styleId, kind: 'video', id },
+        key: { game, styleId: mediaNamespace(styleId, player), kind: 'video', id },
         roomId: r.id,
         explainBlocked: manual,
         note: () => guard.noteVideo(),
         call: () =>
           openrouter.video(
             settings.videoModel,
-            buildVideoPrompt({ game, styleId, roomName: r.name, event: eventOf(kind, r, text) }),
+            buildVideoPrompt({ game, styleId, roomName: r.name, event: eventOf(kind, r, text), playerPrompt: player }),
           ),
         show: (b) => ui.showVideo(b),
       });

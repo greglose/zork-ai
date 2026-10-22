@@ -1,5 +1,6 @@
 ---
 import '../styles/zork.css';
+import { PLAYER_PROMPT_MAX } from '../lib/if/player';
 import { defaultSettings } from '../lib/if/settings';
 import { STYLES } from '../lib/if/styles';
 
@@ -43,7 +44,7 @@ const defaults = defaultSettings();
               <button type="button" class="gbtn" data-act="close-video" hidden>Close video</button>
             </div>
             <p class="fine" id="video-hint">Makes a short clip of where you are. It costs money on your OpenRouter account.</p>
-            <p class="fine" id="retry-hint">Asks for this place's picture again, for example after an error.</p>
+            <p class="fine" id="retry-hint">Asks for this place's picture again, for example after an error or after you change the description of yourself in Settings.</p>
           </section>
 
           <section class="text" aria-label="The game">
@@ -72,7 +73,7 @@ const defaults = defaultSettings();
             <p id="cost-notice">
               Pictures and videos are made by AI models through your own OpenRouter account and cost real money, charged
               by OpenRouter. The description of each place and your art style are sent to OpenRouter and the model's
-              provider. Your commands are not. Nothing is sent to the people who made this app. Nothing is made until
+              provider. If you write a description of yourself below, that text is also sent to OpenRouter and the model's provider with every picture and video request. Your commands are not. Nothing is sent to the people who made this app. Nothing is made until
               you accept this and add a key.
             </p>
             <label class="check"><input type="checkbox" data-consent aria-describedby="cost-notice" /> I understand and accept the cost</label>
@@ -82,6 +83,11 @@ const defaults = defaultSettings();
             <p class="fine" id="key-hint">Kept in this browser only and sent to openrouter.ai alone. Anyone who can use this browser profile can read it.</p>
             <button type="button" class="gbtn" data-act="forget">Forget key</button>
             <p class="fine" data-settings-status role="status"></p>
+            <label for="player-prompt">About you and how it should look</label>
+            <textarea id="player-prompt" data-player-prompt rows="4" maxlength={PLAYER_PROMPT_MAX} autocomplete="off" spellcheck="true" aria-describedby="player-hint player-count" placeholder="Example: I am a woman adventurer dressed for a day of hiking. I wish to explore a colorful cartoon version of this game."></textarea>
+            <p class="fine" id="player-hint">Optional. This text is sent to OpenRouter and the model provider with each picture request, so leave out anything private. Your commands are never sent. Press Redraw picture to apply it to the place you are in.</p>
+            <p class="fine" id="player-count" data-player-count aria-hidden="true">0 of {PLAYER_PROMPT_MAX} characters</p>
+            <p class="fine visually-hidden" data-player-count-live role="status" aria-live="polite"></p>
             <label>Picture model
               <input type="text" data-image-model autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" value={defaults.imageModel} />
             </label>
@@ -104,6 +110,7 @@ const defaults = defaultSettings();
               <li>Open Settings, read the cost notice, accept it, and paste an OpenRouter key. Without a key the game is still fully playable.</li>
               <li>Each new place gets one picture in your chosen art style. A place you have seen before shows its saved picture for free.</li>
               <li>A short video is made when your score goes up, when you die, and at the end. Press Make a video to film where you are.</li>
+              <li>You can describe yourself in Settings (for example, how you are dressed or the look you want). That text is sent with each picture and video request. Your typed commands never are.</li>
               <li>Each session is capped (see Settings). Pictures and videos are saved in this browser, not on a server.</li>
             </ul>
             <p>

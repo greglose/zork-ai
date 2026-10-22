@@ -4,6 +4,7 @@ import type { GameId } from '../lib/if/types';
 
 export interface MediaKey {
   game: GameId;
+  /** The style id, plus a short hash of the player's description when there is one (see mediaNamespace). */
   styleId: string;
   kind: 'image' | 'video';
   id: string;

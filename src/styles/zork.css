@@ -52,6 +52,9 @@ a { color: var(--hilite); }
 .cmd label { font-weight: 700; }
 .cmd input { flex: 1 1 auto; min-width: 0; }
 
+textarea { width: 100%; padding: 8px; border: 2px solid var(--ink); border-radius: 0; background: var(--paper); color: var(--ink); font: inherit; resize: vertical; }
+.fields > label[for] { font-weight: 700; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 input[type='text'], input[type='password'], select { min-height: 44px; padding: 0 8px; border: 2px solid var(--ink); border-radius: 0; background: var(--paper); color: var(--ink); font: inherit; }
 .gbtn { min-height: 44px; min-width: 44px; padding: 0 14px; border: 2px solid var(--ink); border-radius: 0; background: var(--paper); color: var(--ink); font: inherit; font-weight: 700; box-shadow: 2px 2px 0 var(--ink); cursor: pointer; }
 .gbtn:hover, .gbtn:active { background: var(--hilite); color: var(--on-hilite); }
